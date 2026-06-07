@@ -1,17 +1,13 @@
-import { Component, HostListener, inject, signal } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { Component, signal } from '@angular/core';
+import { RouterOutlet } from '@angular/router';
+import { Navbar } from './core/components/navbar/navbar';
+
 @Component({
   selector: 'app-root',
-  imports: [CommonModule],
+  imports: [RouterOutlet, Navbar],
   templateUrl: './app.html',
   styleUrl: './app.css'
 })
 export class App {
   protected readonly title = signal('mobile-core');
-
-  activeScreen: string = 'home';
-  showCelebrationModal: boolean = false;
-  finishedWorkoutName: string = '';
-  finishedElapsedSeconds: number = 0;
-
 }
