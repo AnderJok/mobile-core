@@ -1,3 +1,21 @@
 /* You can add global styles to this file, and also import other style files */
 
 @import 'tailwindcss';
+
+:root {
+    --pumpkin-orange: #ff8a00;
+    --dark-slate: #373a3e;
+    --slate: #708090;
+    --cream: #fff2df;
+
+    --text-primary: #ffffff;
+    --text-secondary: #b3b3b3;
+
+    --bg-primary: var(--dark-slate);
+    --bg-secondary: var(--cream);
+}
+
+body {
+    background-color: #000;
+    color: var(--cream);
+}

@@ -1,0 +1,9 @@
+.navbar {
+    background-color: var(--bg-primary);
+    color: var(--pumpkin-orange);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.5rem;
+    border-radius: 0.5rem;
+}
