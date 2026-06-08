@@ -1,3 +1,6 @@
-<div class="navbar">
-    <p>global-player works!</p>
-</div>
+@if(workoutPlayerService.activeWorkout() != null) {
+    <div class="navbar">
+        <p>global-player works!</p>
+        <a (click)="workoutPlayerService.stopWorkout()">-STOP</a>
+    </div>
+}

@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
+import { WorkoutPlayerService } from '../../services/workout-player.service';
 
 @Component({
   selector: 'app-global-player',
@@ -6,4 +7,6 @@ import { Component } from '@angular/core';
   templateUrl: './global-player.html',
   styleUrl: './global-player.css',
 })
-export class GlobalPlayer {}
+export class GlobalPlayer {
+  workoutPlayerService = inject(WorkoutPlayerService);
+}
