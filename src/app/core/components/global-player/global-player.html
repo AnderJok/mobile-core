@@ -1,6 +1,14 @@
 @if(workoutPlayerService.activeWorkout() != null) {
     <div class="navbar">
-        <p>global-player works!</p>
-        <a (click)="workoutPlayerService.stopWorkout()">-STOP</a>
+            <span>
+            <p>{{ workoutPlayerService.activeWorkout()?.name }}</p>
+        </span>
+            <p>{{ workoutPlayerService.isPlaying() ? 'Playing' : 'Paused' }}</p>
+        <span>
+            <a (click)="workoutPlayerService.togglePlayPause()">{{ workoutPlayerService.isPlaying() ? 'PAUSE' : 'PLAY' }}</a>
+        </span>
+        <span>
+            <a (click)="workoutPlayerService.stopWorkout()">STOP</a>
+        </span>
     </div>
 }

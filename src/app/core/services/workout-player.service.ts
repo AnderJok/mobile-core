@@ -18,4 +18,7 @@ export class WorkoutPlayerService {
         this.activeWorkout.set(null);
     }
 
+    togglePlayPause() {
+        this.isPlaying.update(isPlaying => !isPlaying);
+    }
 }

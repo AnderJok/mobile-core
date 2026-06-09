@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
+import { WorkoutPlayerService } from '../../../../core/services/workout-player.service';
 
 @Component({
   selector: 'app-active-workout',
@@ -6,4 +7,6 @@ import { Component } from '@angular/core';
   templateUrl: './active-workout.html',
   styleUrl: './active-workout.css',
 })
-export class ActiveWorkout {}
+export class ActiveWorkout {
+  workoutPlayerService = inject(WorkoutPlayerService);
+}

@@ -1,1 +1,12 @@
-<p>active-workout works!</p>
+<div>
+    <h1>Active Workout</h1>
+    <hr>
+    <p>Name: {{ workoutPlayerService.activeWorkout()?.name }}</p>
+    <p>Status: {{ workoutPlayerService.isPlaying() ? 'Playing' : 'Paused' }}</p>
+    <button (click)="workoutPlayerService.togglePlayPause()">
+        {{ workoutPlayerService.isPlaying() ? 'Pause' : 'Play' }}
+    </button>
+    <a href="/home" (click)="workoutPlayerService.stopWorkout()">
+        Stop Workout
+    </a>
+</div>
