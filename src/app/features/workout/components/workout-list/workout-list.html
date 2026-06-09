@@ -1,25 +1,11 @@
-<p>workout-list works!</p>
 <ul>
-    <li>
-        <div>
-            Workout 1
-            <a (click)="startWorkout()"><b>Play</b></a>
-            <a href="workout-view/1"> Edit</a>
-        </div>
-
-    </li>
-    <li>
-        <div>
-            Workout 2
-            <a (click)="startWorkout()"><b>Play</b></a>
-            <a href="workout-view/2"> Edit</a>
-        </div>
-    </li>
-    <li>
-        <div>
-            Workout 3
-            <a (click)="startWorkout()"><b>Play</b></a>
-            <a href="workout-view/3"> Edit</a>
-        </div>
-    </li>
+    @for (workout of mockService.workouts(); track workout.id) {
+        <li>
+            <div>
+                {{ workout.name }}
+                <a (click)="startWorkout()"><b>Play</b></a>
+                <a href="workout-view/{{ workout.id }}"> Edit</a>
+            </div>
+        </li>
+    }
 </ul>

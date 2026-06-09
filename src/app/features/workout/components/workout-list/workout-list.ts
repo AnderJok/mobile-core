@@ -1,5 +1,6 @@
 import { Component, inject } from '@angular/core';
 import { WorkoutPlayerService } from '../../../../core/services/workout-player.service';
+import { MockService } from '../../../../core/services/mock.service';
 
 @Component({
   selector: 'app-workout-list',
@@ -9,7 +10,7 @@ import { WorkoutPlayerService } from '../../../../core/services/workout-player.s
 })
 export class WorkoutList {
   workoutPlayerService = inject(WorkoutPlayerService);
-
+  readonly mockService = inject(MockService);
   startWorkout() {
     const workout = {
       id: '1',

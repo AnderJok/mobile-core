@@ -1,6 +1,10 @@
-<p>exercise-list works!</p>
-<ul>
-    <li>Exercise 1 - Muscle Group A</li>
-    <li>Exercise 2 - Muscle Group B</li>
-    <li>Exercise 3 - Muscle Group C</li>
-</ul>
+<ol>
+    @for (exercise of mockService.exercises(); track exercise.id) {
+    <li>
+        {{exercise.name}} - 
+        @for(muscleGroup of exercise.muscleGroup; track muscleGroup.id) {
+            <span>{{muscleGroup.name}}, </span>
+        }
+    </li>
+    }
+</ol>
