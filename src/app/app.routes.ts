@@ -1,4 +1,5 @@
 import { Routes } from '@angular/router';
+import { activeWorkoutGuard } from './core/guards/active-workout.guard';
 
 export const routes: Routes = [
     { path: '', redirectTo: 'home', pathMatch: 'full' },
@@ -12,6 +13,7 @@ export const routes: Routes = [
     },
     {
         path: 'active-workout/:id',
+        canActivate: [activeWorkoutGuard],
         loadComponent: () => import('./features/workout/pages/active-workout/active-workout').then((m) => m.ActiveWorkout),
     },
     {
