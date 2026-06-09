@@ -3,8 +3,8 @@
         <li>
             <div>
                 {{ workout.name }}
-                <a (click)="startWorkout()"><b>Play</b></a>
-                <a href="workout-view/{{ workout.id }}"> Edit</a>
+                <button type="button" (click)="startWorkout(workout)"><b>Play</b></button>
+                <a [routerLink]="['/workout-view', workout.id]">Edit</a>
             </div>
         </li>
     }

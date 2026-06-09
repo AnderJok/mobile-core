@@ -1,14 +1,19 @@
-@if(workoutPlayerService.activeWorkout() != null) {
+@if(workoutPlayerService.activeWorkout(); as activeWorkout) {
     <div class="navbar">
-            <span>
-            <p>{{ workoutPlayerService.activeWorkout()?.name }}</p>
-        </span>
-            <p>{{ workoutPlayerService.isPlaying() ? 'Playing' : 'Paused' }}</p>
         <span>
-            <a (click)="workoutPlayerService.togglePlayPause()">{{ workoutPlayerService.isPlaying() ? 'PAUSE' : 'PLAY' }}</a>
+            <p>{{ activeWorkout.name }}</p>
+        </span>
+        <p>{{ workoutPlayerService.isPlaying() ? 'Playing' : 'Paused' }}</p>
+        <span>
+            <button type="button" (click)="workoutPlayerService.togglePlayPause()">
+                {{ workoutPlayerService.isPlaying() ? 'PAUSE' : 'PLAY' }}
+            </button>
         </span>
         <span>
-            <a (click)="workoutPlayerService.stopWorkout()">STOP</a>
+            <button type="button" (click)="stopWorkout()">STOP</button>
+        </span>
+        <span>
+            <button type="button" (click)="goToWorkout()">Go to Workout</button>
         </span>
     </div>
 }

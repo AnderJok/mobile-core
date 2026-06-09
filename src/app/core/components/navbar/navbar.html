@@ -5,7 +5,7 @@
     <div><a routerLink="/history" routerLinkActive="active">History</a></div>
     <div><a routerLink="/profile" routerLinkActive="active">Profile</a></div>
     <div><a routerLink="/settings" routerLinkActive="active">Settings</a></div>
-    @if (workoutPlayerService.activeWorkout() != null) {
-        <div><a routerLink="/active-workout/{{ workoutPlayerService.activeWorkout()?.id }}" routerLinkActive="active">Active Workout</a></div>
+    @if (workoutPlayerService.activeWorkout(); as activeWorkout) {
+        <div><a [routerLink]="['/active-workout', activeWorkout.id]" routerLinkActive="active">Active Workout</a></div>
     }
 </nav>
