@@ -1,0 +1,60 @@
+.form-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--stack-md);
+}
+@media (min-width: 768px) {
+    .form-grid { grid-template-columns: 1fr 1fr; }
+    .col-span-2 { grid-column: span 2; }
+}
+
+.field-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.label {
+    font-family: var(--font-body);
+    font-size: 14px;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+    color: var(--on-surface-variant);
+}
+
+.input {
+    background-color: var(--surface);
+    border: 1px solid var(--outline-variant);
+    border-radius: 0.5rem;
+    padding: 0.75rem 1rem;
+    color: var(--on-surface);
+    outline: none;
+    transition: all 0.2s;
+}
+.input:focus {
+    border-color: var(--primary-container);
+    box-shadow: 0 0 0 1px var(--primary-container);
+}
+
+.save-btn {
+    width: 100%;
+    height: 3.5rem;
+    background-color: var(--primary-container);
+    color: var(--on-primary-container);
+    font-family: var(--font-headline);
+    font-size: 20px;
+    font-weight: 600;
+    border-radius: 1rem;
+    border: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    cursor: pointer;
+    transition: all 0.2s;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    margin-top: 0.5rem;
+}
+.save-btn:active { transform: scale(0.98); }
+.save-btn:hover { opacity: 0.9; }

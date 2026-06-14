@@ -1,0 +1,19 @@
+.form-section {
+    flex-shrink: 0;
+    padding-top: 1rem;
+    margin-bottom: 2rem;
+}
+
+.filter-se1ction {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.list-section {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+}
+

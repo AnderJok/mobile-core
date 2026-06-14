@@ -1,10 +1,23 @@
-<ol>
+<ol class="items-list">
     @for (exercise of mockService.exercises(); track exercise.id) {
-    <li>
-        {{exercise.name}} - 
-        @for(muscleGroup of exercise.muscleGroup; track muscleGroup.id) {
-            <span>{{muscleGroup.name}}, </span>
-        }
+    <li class="exercise-card list-item featured">
+        <div class="item-info">
+            <span class="item-name">{{exercise.name}}</span>
+            <div class="item-meta">
+                <span class="badge">{{exercise.type}}</span>
+                @for(muscleGroup of exercise.muscleGroup; track muscleGroup.id) {
+                    <span class="tags">{{muscleGroup.name}}</span>
+                }
+            </div>
+            <div class="item-actions">
+                <button class="action-btn edit">
+                    <span class="material-symbols-outlined">edit</span>
+                </button>
+                <button class="action-btn delete">
+                    <span class="material-symbols-outlined">delete</span>
+                </button>
+            </div>
+        </div>
     </li>
     }
 </ol>

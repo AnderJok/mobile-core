@@ -1,7 +1,26 @@
-<div>
-    <p>Form with a couple of inputs and a button to create a new exercise</p>
-    <input type="text" placeholder="Exercise Name" />
-    <input type="text" placeholder="Muscle Group" />
-    
-    <button>+ Create Exercise</button>
+<!-- <h2 class="section-title">Manage Exercises</h2> -->
+<div class="exercise-card">
+    <form class="form-grid">
+         <div class="field-group">
+            <label class="label">Name</label>
+            <input class="input" placeholder="e.g. Weighted Pullups" type="text"/>
+        </div>
+        <div class="field-group">
+            <label class="label">Type</label>
+            <select class="input">
+                <option value="reps">Reps</option>
+                <option value="time">Time</option>
+            </select>
+        </div>
+        <div class="field-group col-span-2">
+            <label class="label">Tags</label>
+            <input class="input" placeholder="Strength, Finger, Grip" type="text"/>
+        </div>
+        <div class="col-span-2">
+            <button class="save-btn" type="submit">
+                <span class="material-symbols-outlined">save</span>
+            </button>
+        </div>
+        <button>+ Create Exercise</button>
+    </form>
 </div>

@@ -1,0 +1,74 @@
+.items-list {
+    flex: 1;
+    overflow-y: auto;
+    padding-right: 0.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: var(--stack-sm);
+}
+
+.list-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1rem;
+    border-radius: 0.75rem;
+}
+.list-item.featured { border-left: 4px solid var(--primary-container); }
+
+.item-info {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+}
+
+.item-name {
+    font-family: var(--font-headline);
+    font-size: 20px;
+    font-weight: 600;
+    color: #fff;
+}
+
+.item-meta {
+    display: flex;
+    gap: 0.5rem;
+    align-items: center;
+}
+
+.badge {
+    background-color: var(--surface);
+    padding: 0.125rem 0.5rem;
+    border-radius: 0.25rem;
+    font-size: 10px;
+    font-weight: 700;
+    color: var(--primary);
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+}
+
+.tags {
+    color: var(--on-surface-variant);
+    font-size: 12px;
+    font-weight: 500;
+}
+
+
+.item-actions {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.action-btn {
+    background: none;
+    border: none;
+    padding: 0.75rem;
+    color: var(--on-surface-variant);
+    cursor: pointer;
+    border-radius: 0.25rem;
+    display: flex;
+    align-items: center;
+    transition: color 0.2s;
+}
+.action-btn.edit:hover { color: var(--primary); }
+.action-btn.delete:hover { color: var(--error); }
