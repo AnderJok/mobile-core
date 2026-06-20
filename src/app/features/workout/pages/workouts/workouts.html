@@ -3,10 +3,10 @@
         <app-workout-filter></app-workout-filter>
     </section>
     <section>
-        <button class="builder-btn">
-            <span class="material-symbols-outlined">+</span>
+        <a [routerLink]="['/workout-builder']" class="builder-btn">
+              <span class="material-symbols-outlined">+</span>
             <span>WORKOUT BUILDER</span>
-        </button>
+          </a>
     </section>
     <section>
         <app-workout-list></app-workout-list>
