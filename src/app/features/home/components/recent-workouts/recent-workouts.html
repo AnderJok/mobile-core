@@ -1,10 +1,20 @@
-@for (workout of mockService.workouts(); track workout.id) {
-    <ul>
+<ul class="history-list">
+    @for (item of last3Workouts(); track item.workout.id) {
         <li>
-            <div>
-                {{ workout.name }} - {{ workout.description }}
-                <button type="button" (click)="startWorkout(workout)"><b>Play</b></button>
+            <div class="workout-card">
+                <div class="workout-info">
+                    <span class="workout-date">{{ item.date | date: 'longDate' }}</span>
+                    <h3 class="workout-name"> {{ item.workout.name }}</h3>
+                </div>
+                <!-- - {{ item.workout.description }} -->
+                <div class="workout-stats">
+                    <div class="stat-group">
+                        <span class="stat-duration">55m</span>
+                        <span class="stat-status">Completed</span>
+                    </div>
+                    <span>Resume ></span>
+                </div>
             </div>
         </li>
-    </ul>
-}
+    }
+</ul>

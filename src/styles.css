@@ -23,6 +23,7 @@
     --surface-bright: #43372e;
     --on-surface: var(--text-primary);
     --on-surface-variant: var(--text-secondary);
+    --on-surface-cream: var(--cream);
     
     --primary: var(--pumpkin-orange);
     --primary-container: var(--pumpkin-orange);
