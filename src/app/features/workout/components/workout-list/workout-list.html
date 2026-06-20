@@ -1,11 +1,34 @@
-<ul>
-    @for (workout of mockService.workouts(); track workout.id) {
-        <li>
-            <div>
-                {{ workout.name }}
-                <button type="button" (click)="startWorkout(workout)"><b>Play</b></button>
-                <a [routerLink]="['/workout-view', workout.id]">Edit</a>
+<div class="workout-list">
+    <div class="section-header">
+        <h3 class="section-title">My Workouts</h3>
+        <span class="section-status">¿status?</span>
+    </div>
+    <ul class="workout-cards">
+        @for (workout of mockService.workouts(); track workout.id) {
+        <li class="workout-card active-border">
+            <div class="workout-card-content">
+                <div class="workout-card-header">
+                    <h4 class="workout-card-title">{{ workout.name }}</h4>
+                    <div class="workout-card-meta">
+                        <p class="workout-card-description">{{ workout.description }}</p>
+                        <div class="workout-card-tags">
+                            @for(tag of workout.tags; track tag.id) {
+                                <span class="workout-tag">{{ tag.name }}</span>
+                            }
+                        </div>
+                    </div>
+                </div>
+                <div class="workout-card-actions">
+                    <button class="action-btn btn-primary" (click)="startWorkout(workout)">Start</button>
+                    <button class="action-btn btn-secondary">Edit</button>
+                    <!-- <a [routerLink]="['/workout-view', workout.id]">Edita</a> -->
+                </div>
+            </div>
+            <div class="workout-card-footer">
+                <span>Last completed: 2 days ago</span>
+                <span class="footer-highlight">PR: 12 Problems</span>
             </div>
         </li>
-    }
-</ul>
+        }
+    </ul>
+</div>

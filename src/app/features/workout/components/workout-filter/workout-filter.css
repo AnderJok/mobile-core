@@ -1,0 +1,25 @@
+.search-bar {
+    display: flex;
+    align-items: center;
+    gap: var(--gap-sm);
+    background-color: var(--surface-container-high);
+    border-radius: var(--radius-2xl);
+    padding: 0.5rem;
+    border: 1px solid rgba(86, 67, 52, 0.3);
+    transition: border-color 0.2s;
+}
+
+
+.search-bar:focus-within {
+    border-color: var(--primary);
+}
+
+.search-input {
+    background: transparent;
+    border: none;
+    outline: none;
+    width: 100%;
+    color: var(--on-surface);
+    font-family: var(--font-main);
+    padding: 0.5rem 0;
+}

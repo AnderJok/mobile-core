@@ -1,9 +1,14 @@
-<section>
-    <app-workout-filter></app-workout-filter>
-    <hr>
-    <a href="workout-builder">+ Create Workout</a>
-</section>
-<hr>
-<section>
-    <app-workout-list></app-workout-list>
-</section>
+<article class="workouts-container">
+    <section class="search-container">
+        <app-workout-filter></app-workout-filter>
+    </section>
+    <section>
+        <button class="builder-btn">
+            <span class="material-symbols-outlined">+</span>
+            <span>WORKOUT BUILDER</span>
+        </button>
+    </section>
+    <section>
+        <app-workout-list></app-workout-list>
+    </section>
+</article>
