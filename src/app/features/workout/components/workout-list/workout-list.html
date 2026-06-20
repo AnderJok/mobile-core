@@ -20,8 +20,7 @@
                 </div>
                 <div class="workout-card-actions">
                     <button class="action-btn btn-primary" (click)="startWorkout(workout)">Start</button>
-                    <button class="action-btn btn-secondary">Edit</button>
-                    <!-- <a [routerLink]="['/workout-view', workout.id]">Edita</a> -->
+                    <a [routerLink]="['/workout-view', workout.id]" class="action-btn btn-secondary">Edit</a>
                 </div>
             </div>
             <div class="workout-card-footer">
