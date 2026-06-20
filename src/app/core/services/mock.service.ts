@@ -4,6 +4,7 @@ import { ExerciseType } from "../../shared/interfaces/exercise-type";
 import { MuscleGroup } from "../../shared/interfaces/muscle-group";
 import { Workout } from "../../shared/interfaces/workout";
 import { WorkoutTag } from "../../shared/interfaces/workout-tag";
+import { HistoryRecord } from "../../shared/interfaces/history-record";
 
 const SEED_MUSCLE_GROUPS: MuscleGroup[] = [
   { id: 1, name: 'Pecho' },
@@ -158,39 +159,81 @@ const SEED_WORKOUTS: Workout[] = [
   }
 ];
 
+const SEED_WORKOUT_HISTORY: HistoryRecord[] = [
+  {
+    id: '1',
+    date: new Date('2026-04-15'),
+    workoutId: '1'
+  },
+  {
+    id: '2',
+    date: new Date('2026-04-17'),
+    workoutId: '2'
+  },
+  {
+    id: '3',
+    date: new Date('2026-04-20'),
+    workoutId: '3'
+  },
+  {
+    id: '4',
+    date: new Date('2026-06-22'),
+    workoutId: '3'
+  },
+  {
+    id: '5',
+    date: new Date('2026-04-25'),
+    workoutId: '2'
+  }
+];
+
 @Injectable({
     providedIn: 'root'
 })
 export class MockService {
-    private muscleGroupsSignal: WritableSignal<MuscleGroup[]> = signal([]);
-    private exercisesSignal: WritableSignal<Exercise[]> = signal([]);
-    private workoutsSignal: WritableSignal<Workout[]> = signal([]);
+  private muscleGroupsSignal: WritableSignal<MuscleGroup[]> = signal([]);
+  private exercisesSignal: WritableSignal<Exercise[]> = signal([]);
+  private workoutsSignal: WritableSignal<Workout[]> = signal([]);
 
-    readonly muscleGroups = this.muscleGroupsSignal.asReadonly();
-    readonly exercises = this.exercisesSignal.asReadonly();
-    readonly workouts = this.workoutsSignal.asReadonly();
+  readonly muscleGroups = this.muscleGroupsSignal.asReadonly();
+  readonly exercises = this.exercisesSignal.asReadonly();
+  readonly workouts = this.workoutsSignal.asReadonly();
 
-    constructor() {
-        this.setDefaultData();
-    }
+  constructor() {
+      this.setDefaultData();
+  }
 
-    private setDefaultData(): void {
-        this.muscleGroupsSignal.set(SEED_MUSCLE_GROUPS);
-        this.exercisesSignal.set(SEED_EXERCISES);
-        this.workoutsSignal.set(SEED_WORKOUTS);
-        return;
-    }
+  private setDefaultData(): void {
+      this.muscleGroupsSignal.set(SEED_MUSCLE_GROUPS);
+      this.exercisesSignal.set(SEED_EXERCISES);
+      this.workoutsSignal.set(SEED_WORKOUTS);
+      return;
+  }
 
-    addExercise(exercise: Exercise): void {}
+  addExercise(exercise: Exercise): void {}
 
-    updateExercise(idExercise: number, exercise: Exercise): void {}
+  updateExercise(idExercise: number, exercise: Exercise): void {}
 
-    deleteExercise(idExercise: number): void {}
+  deleteExercise(idExercise: number): void {}
 
-    addWorkout(workout: Workout): void {}
+  addWorkout(workout: Workout): void {}
 
-    updateWorkout(idWorkout: number, workout: Workout): void {}
+  updateWorkout(idWorkout: number, workout: Workout): void {}
 
-    deleteWorkout(idWorkout: number): void {}
+  deleteWorkout(idWorkout: number): void {}
 
+  // History Records
+  getAllHistoryRecords(): HistoryRecord[] {
+    return SEED_WORKOUT_HISTORY;
+  }
+
+  getHistoryRecordByWorkoutId(workoutId: string): HistoryRecord | undefined {
+    const history: HistoryRecord | undefined = SEED_WORKOUT_HISTORY.find(record => record.workoutId === workoutId);
+    return history;
+  }
+
+  getLastHistoryRecords(count: number): HistoryRecord[] {
+    const sortedHistory = [...SEED_WORKOUT_HISTORY].sort((a, b) => b.date.getTime() - a.date.getTime());
+    return sortedHistory.slice(0, count);
+  }
 }
