@@ -1,12 +1,18 @@
-<h1>Past workouts</h1>
-<ul>
-    <li>Workout 1 - 2024-06-01
-        <a href="workout-view">View</a>
-    </li>
-    <li>Workout 2 - 2024-06-03
-        <a href="workout-view">View</a>
-    </li>
-    <li>Workout 3 - 2024-06-05
-        <a href="workout-view">View</a>
-    </li>
+<ul class="history-list">
+    @for (item of historyWorkoutList(); track item.workout.id) {
+        <li>
+            <div class="workout-card">
+                <div class="workout-info">
+                    <span class="workout-date">{{ item.date | date: 'longDate' }}</span>
+                    <h3 class="workout-name"> {{ item.workout.name }}</h3>
+                </div>
+                <div class="workout-stats">
+                    <div class="stat-group">
+                        <span class="stat-duration">55m</span>
+                        <span class="stat-status">Completed</span>
+                    </div>
+                </div>
+            </div>
+        </li>
+    }
 </ul>

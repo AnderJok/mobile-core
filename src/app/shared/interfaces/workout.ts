@@ -1,3 +1,4 @@
+import { Exercise } from "./exercise";
 import { WorkoutBlock } from "./workout-block";
 import { WorkoutTag } from "./workout-tag";
 
