@@ -1,7 +1,8 @@
 import { Exercise } from "./exercise";
 
 export interface ExerciseInstance {
+  id: string;
   exercise: Exercise;
-  targetValue: number; // tiempo en segundos o número de repeticiones
-  weight: number; // peso o lastre a utilizar (kg)
+  targetValue: number; // Seconds (if TIME) or repetitions (if REPS)
+  weight?: number; // Optional, for additional load or weights
 }

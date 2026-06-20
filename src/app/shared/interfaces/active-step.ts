@@ -1,14 +1,20 @@
 import { ExerciseInstance } from "./exercise-instance";
 
+export type StepType = 'EXERCISE' | 'REST' | 'PREPARE';
+
 export interface ActiveStep {
   id: string;
-  type: 'EXERCISE' | 'REST';
-  exerciseInstance?: ExerciseInstance;
-  side: 'L' | 'R' | 'NONE';
+  type: StepType;
   name: string;
-  description: string;
-  valueType: 'TIME' | 'REPS' | 'REST';
-  targetValue: number; // target countdown seconds (if TIME/REST) or reps goal (if REPS)
+  valueType: 'TIME' | 'REPS';
   weight?: number;
+  targetValue: number; // target countdown seconds (if TIME/REST) or reps goal (if REPS)
+  side: 'L' | 'R' | 'NONE';
+  
+  description: string;
   blockIndex: number;
+  roundIndex: number;
+  exerciseIndex: number;
+
+  exerciseInstanceId?: ExerciseInstance;
 }

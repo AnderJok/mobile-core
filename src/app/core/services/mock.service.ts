@@ -6,16 +6,17 @@ import { Workout } from "../../shared/interfaces/workout";
 import { WorkoutTag } from "../../shared/interfaces/workout-tag";
 import { HistoryRecord } from "../../shared/interfaces/history-record";
 
-const SEED_MUSCLE_GROUPS: MuscleGroup[] = [
+export const SEED_MUSCLE_GROUPS: MuscleGroup[] = [
   { id: 1, name: 'Pecho' },
   { id: 2, name: 'Espalda' },
   { id: 3, name: 'Piernas' },
   { id: 4, name: 'Brazos' },
   { id: 5, name: 'Hombros' },
-  { id: 6, name: 'Abdomen' }
+  { id: 6, name: 'Abdomen' },
+  { id: 7, name: 'Antebrazos' } 
 ];
 
-const SEED_TAGS: WorkoutTag[] = [
+export const SEED_TAGS: WorkoutTag[] = [
   { id: 1, name: 'fuerza' },
   { id: 2, name: 'resistencia' },
   { id: 3, name: 'flexibilidad' },
@@ -23,167 +24,167 @@ const SEED_TAGS: WorkoutTag[] = [
   { id: 5, name: 'cardio' },
   { id: 6, name: 'core' },
   { id: 7, name: 'tren-superior' },
-  { id: 8, name: 'tren-inferior' }
+  { id: 8, name: 'tren-inferior' },
+  { id: 9, name: 'agarre' },
+  { id: 10, name: 'ocr' }
 ];
 
-const SEED_EXERCISES: Exercise[] = [
+export const SEED_EXERCISES: Exercise[] = [
   {
-    id: 1,
+    id: 'ex-1',
     name: 'Press de Banca',
     description: 'Ejercicio de press con barra',
-    muscleGroup: [SEED_MUSCLE_GROUPS[0]],
-    type: ExerciseType.REPS,
-    hasVariations: true,
-    defaultValue: 10,
-    tags: ['fuerza', 'pecho']
-  },
-  {
-    id: 2,
-    name: 'Sentadillas',
-    description: 'Ejercicio de piernas',
-    muscleGroup: [SEED_MUSCLE_GROUPS[2]],
-    type: ExerciseType.REPS,
-    hasVariations: true,
-    defaultValue: 12,
-    tags: ['fuerza', 'piernas']
-  },
-  {
-    id: 3,
-    name: 'Fondos en Paralelas',
-    description: 'Ejercicio de tríceps y pecho',
-    muscleGroup: [SEED_MUSCLE_GROUPS[0], SEED_MUSCLE_GROUPS[3]],
+    muscleGroups: [SEED_MUSCLE_GROUPS[0], SEED_MUSCLE_GROUPS[4]], 
     type: ExerciseType.REPS,
     hasVariations: false,
-    defaultValue: 8,
-    tags: ['fuerza', 'triceps']
+    tags: ['fuerza', 'tren-superior']
   },
   {
-    id: 4,
+    id: 'ex-2',
+    name: 'Sentadillas',
+    description: 'Ejercicio de piernas clásico',
+    muscleGroups: [SEED_MUSCLE_GROUPS[2], SEED_MUSCLE_GROUPS[3]],
+    type: ExerciseType.REPS,
+    hasVariations: false,
+    tags: ['fuerza', 'tren-inferior']
+  },
+  {
+    id: 'ex-3',
+    name: 'Zancadas Búlgaras',
+    description: 'Sentadilla a una pierna con apoyo trasero',
+    muscleGroups: [SEED_MUSCLE_GROUPS[2]],
+    type: ExerciseType.REPS,
+    hasVariations: true, // Izquierda y Derecha
+    tags: ['fuerza', 'equilibrio', 'tren-inferior']
+  },
+  {
+    id: 'ex-4',
     name: 'Plancha',
     description: 'Ejercicio isométrico de abdomen',
-    muscleGroup: [SEED_MUSCLE_GROUPS[5]],
+    muscleGroups: [SEED_MUSCLE_GROUPS[5], SEED_MUSCLE_GROUPS[6]],
     type: ExerciseType.TIME,
-    hasVariations: true,
-    defaultValue: 60,
-    tags: ['resistencia', 'abdomen']
+    hasVariations: false,
+    tags: ['resistencia', 'core']
   },
   {
-    id: 5,
+    id: 'ex-5',
     name: 'Remo con Barra',
-    description: 'Ejercicio de espalda',
-    muscleGroup: [SEED_MUSCLE_GROUPS[1]],
+    description: 'Tracción horizontal',
+    muscleGroups: [SEED_MUSCLE_GROUPS[1]],
     type: ExerciseType.REPS,
-    hasVariations: true,
-    defaultValue: 10,
-    tags: ['fuerza', 'espalda']
+    hasVariations: false,
+    tags: ['fuerza', 'tren-superior']
+  },
+  {
+    id: 'ex-6',
+    name: 'Suspensión en Regleta (Dead Hang)',
+    description: 'Aguante isométrico para fuerza de dedos',
+    muscleGroups: [SEED_MUSCLE_GROUPS[7], SEED_MUSCLE_GROUPS[1]],
+    type: ExerciseType.TIME,
+    hasVariations: false,
+    tags: ['agarre', 'ocr', 'fuerza']
   }
 ];
 
-const SEED_WORKOUTS: Workout[] = [
+export const SEED_WORKOUTS: Workout[] = [
   {
-    id: '1',
-    name: 'Upper Body',
+    id: 'wk-1',
+    name: 'Upper Body Básico',
     description: 'Entrenamiento de tren superior',
     tags: [SEED_TAGS[0], SEED_TAGS[6]],
     blocks: [
       {
-        id: '1-1',
+        id: 'blk-1-1',
+        rounds: 3, // Repetir este bloque 3 veces
+        restBetweenRounds: 120, // 2 minutos al acabar la vuelta
         exercises: [
           {
-            exercise: SEED_EXERCISES[0],
+            id: 'inst-1',
+            exercise: SEED_EXERCISES[0], // Press de Banca
             targetValue: 10,
             weight: 60
           },
           {
-            exercise: SEED_EXERCISES[2],
-            targetValue: 8,
-            weight: 0
-          }
-        ],
-        restBetweenExercises: 90,
-        restAfterBlock: 180
-      },
-      {
-        id: '1-2',
-        exercises: [
-          {
-            exercise: SEED_EXERCISES[4],
+            id: 'inst-2',
+            exercise: SEED_EXERCISES[4], // Remo
             targetValue: 10,
             weight: 50
           }
         ],
-        restBetweenExercises: 60,
-        restAfterBlock: 120
+        restBetweenExercises: 90
       }
     ]
   },
   {
-    id: '2',
-    name: 'Lower Body',
-    description: 'Entrenamiento de tren inferior',
-    tags: [SEED_TAGS[0], SEED_TAGS[7]],
+    id: 'wk-2',
+    name: 'Fuerza de Agarre y Piernas',
+    description: 'Preparación específica con isométricos y unilaterales',
+    tags: [SEED_TAGS[0], SEED_TAGS[8], SEED_TAGS[9]],
     blocks: [
       {
-        id: '2-1',
+        id: 'blk-2-1',
+        rounds: 4,
+        restBetweenRounds: 60,
         exercises: [
           {
-            exercise: SEED_EXERCISES[1],
-            targetValue: 12,
-            weight: 80
-          }
-        ],
-        restBetweenExercises: 120,
-        restAfterBlock: 240
-      }
-    ]
-  },
-  {
-    id: '3',
-    name: 'Core Workout',
-    description: 'Entrenamiento de núcleo',
-    tags: [SEED_TAGS[5]],
-    blocks: [
-      {
-        id: '3-1',
-        exercises: [
-          {
-            exercise: SEED_EXERCISES[3],
-            targetValue: 60,
+            id: 'inst-3',
+            exercise: SEED_EXERCISES[5], // Suspensión en Regleta
+            targetValue: 30, // 30 segundos
             weight: 0
+          },
+          {
+            id: 'inst-4',
+            exercise: SEED_EXERCISES[2], // Zancadas Búlgaras (Generará paso Izq y Der)
+            targetValue: 8, // 8 reps por pierna
+            weight: 16 // 16kg de lastre (ej. kettlebell)
           }
         ],
-        restBetweenExercises: 60,
-        restAfterBlock: 120
+        restBetweenExercises: 45
       }
     ]
   }
 ];
 
 const SEED_WORKOUT_HISTORY: HistoryRecord[] = [
-  {
-    id: '1',
-    date: new Date('2026-04-15'),
-    workoutId: '1'
+{
+    id: 'hist-1',
+    workoutId: 'wk-1',
+    workoutName: 'Upper Body Básico',
+    date: new Date('2026-04-15T18:30:00'),
+    durationInSeconds: 2700, // 45 minutos
+    notes: ''
   },
   {
-    id: '2',
-    date: new Date('2026-04-17'),
-    workoutId: '2'
+    id: 'hist-2',
+    workoutId: 'wk-2',
+    workoutName: 'Fuerza de Agarre y Piernas',
+    date: new Date('2026-04-17T19:00:00'),
+    durationInSeconds: 3200,
+    notes: ''
   },
   {
-    id: '3',
-    date: new Date('2026-04-20'),
-    workoutId: '3'
+    id: 'hist-3',
+    workoutId: 'wk-1',
+    workoutName: 'Upper Body Básico',
+    date: new Date('2026-04-20T17:45:00'),
+    durationInSeconds: 2500,
+    notes: ''
   },
   {
-    id: '4',
-    date: new Date('2026-06-22'),
-    workoutId: '3'
+    id: 'hist-4',
+    workoutId: 'wk-2',
+    workoutName: 'Fuerza de Agarre y Piernas',
+    date: new Date('2026-04-22T18:15:00'),
+    durationInSeconds: 3000,
+    notes: ''
   },
   {
-    id: '5',
-    date: new Date('2026-04-25'),
-    workoutId: '2'
+    id: 'hist-5',
+    workoutId: 'wk-1',
+    workoutName: 'Upper Body Básico',
+    date: new Date('2026-04-25T19:30:00'),
+    durationInSeconds: 2800,
+    notes: ''
   }
 ];
 

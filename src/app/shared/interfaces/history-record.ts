@@ -1,8 +1,8 @@
-import { ExerciseType } from "./exercise-type";
-import { MuscleGroup } from "./muscle-group";
-
 export interface HistoryRecord {
   id: string;
-  date: Date;
   workoutId: string;
+  workoutName: string;
+  date: Date;
+  durationInSeconds: number;
+  notes?: string;
 }

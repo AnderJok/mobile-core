@@ -5,7 +5,7 @@
             <span class="item-name">{{exercise.name}}</span>
             <div class="item-meta">
                 <span class="badge">{{exercise.type}}</span>
-                @for(muscleGroup of exercise.muscleGroup; track muscleGroup.id) {
+                @for(muscleGroup of exercise.muscleGroups; track muscleGroup.id) {
                     <span class="tags">{{muscleGroup.name}}</span>
                 }
             </div>
