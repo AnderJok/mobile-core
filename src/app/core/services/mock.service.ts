@@ -3,6 +3,7 @@ import { Exercise } from "../../shared/interfaces/exercise";
 import { ExerciseType } from "../../shared/interfaces/exercise-type";
 import { MuscleGroup } from "../../shared/interfaces/muscle-group";
 import { Workout } from "../../shared/interfaces/workout";
+import { WorkoutTag } from "../../shared/interfaces/workout-tag";
 
 const SEED_MUSCLE_GROUPS: MuscleGroup[] = [
   { id: 1, name: 'Pecho' },
@@ -11,6 +12,17 @@ const SEED_MUSCLE_GROUPS: MuscleGroup[] = [
   { id: 4, name: 'Brazos' },
   { id: 5, name: 'Hombros' },
   { id: 6, name: 'Abdomen' }
+];
+
+const SEED_TAGS: WorkoutTag[] = [
+  { id: 1, name: 'fuerza' },
+  { id: 2, name: 'resistencia' },
+  { id: 3, name: 'flexibilidad' },
+  { id: 4, name: 'equilibrio' },
+  { id: 5, name: 'cardio' },
+  { id: 6, name: 'core' },
+  { id: 7, name: 'tren-superior' },
+  { id: 8, name: 'tren-inferior' }
 ];
 
 const SEED_EXERCISES: Exercise[] = [
@@ -71,7 +83,7 @@ const SEED_WORKOUTS: Workout[] = [
     id: '1',
     name: 'Upper Body',
     description: 'Entrenamiento de tren superior',
-    tags: ['fuerza', 'tren-superior'],
+    tags: [SEED_TAGS[0], SEED_TAGS[6]],
     blocks: [
       {
         id: '1-1',
@@ -108,7 +120,7 @@ const SEED_WORKOUTS: Workout[] = [
     id: '2',
     name: 'Lower Body',
     description: 'Entrenamiento de tren inferior',
-    tags: ['fuerza', 'tren-inferior'],
+    tags: [SEED_TAGS[0], SEED_TAGS[7]],
     blocks: [
       {
         id: '2-1',
@@ -128,7 +140,7 @@ const SEED_WORKOUTS: Workout[] = [
     id: '3',
     name: 'Core Workout',
     description: 'Entrenamiento de núcleo',
-    tags: ['resistencia', 'core'],
+    tags: [SEED_TAGS[5]],
     blocks: [
       {
         id: '3-1',
