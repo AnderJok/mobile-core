@@ -86,6 +86,7 @@ body {
     cursor: pointer;
     transition: transform 0.1s, background-color 0.2s;
     border: none;
+    padding: 0.25rem;
 }
 .action-btn.edit:hover { color: var(--primary); }
 .action-btn.delete:hover { color: var(--error); }

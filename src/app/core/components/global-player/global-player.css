@@ -1,10 +1,92 @@
 .navbar {
     background-color: var(--bg-primary);
-    color: var(--pumpkin-orange);
-    display: flex;
-    align-items: center;
-    justify-content: center;
     padding: 0.5rem;
     border-radius: 0.5rem;
     gap: 1rem;
+    display: grid;
+    align-items: center;
+    grid-template-columns: 1fr 6fr 2fr 1fr 1fr 1fr;
 }
+
+.exercise-name {
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: var(--on-surface-cream);
+}
+
+.workout-name {
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: var(--text-secondary);
+}
+
+.workout-time-reps{
+    font-size: 1.5rem;
+    color: var(--on-surface-variant);
+    border: 2px solid var(--outline);
+    border-radius: 0.5rem;
+    padding: 0.25rem 0.5rem;
+    justify-self: center;
+}
+
+.activity-icon {
+    width: 3rem;
+    height: 3rem;
+    border-radius: 0.5rem;
+    background-color: var(--primary-container);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.heartbeat-bars {
+    display: flex;
+    align-items: flex-end;
+    gap: 0.2rem;
+    height: 1rem;
+}
+
+.animate-heartbeat-bar1 {
+    width: 0.25rem;
+    height: 1rem;
+    background-color: var(--on-surface-cream);
+    border-radius: 999px;
+    transform-origin: center bottom;
+    animation: heartbeat 1.5s ease-in-out infinite;
+}
+.animate-heartbeat-bar2 {
+    width: 0.25rem;
+    height: 1rem;
+    background-color: var(--on-surface-cream);
+    border-radius: 999px;
+    transform-origin: center bottom;
+    animation: heartbeat 1.5s ease-in-out infinite 0.15s;
+}
+.animate-heartbeat-bar3 {
+    width: 0.25rem;
+    height: 1rem;
+    background-color: var(--on-surface-cream);
+    border-radius: 999px;
+    transform-origin: center bottom;
+    animation: heartbeat 1.5s ease-in-out infinite 0.3s;
+}
+
+@keyframes heartbeat {
+    0%,
+    100% {
+        transform: scaleY(0.35);
+        opacity: 0.5;
+    }
+    20% {
+        transform: scaleY(1);
+        opacity: 1;
+    }
+    40% {
+        transform: scaleY(0.5);
+        opacity: 0.75;
+    }
+    60% {
+        transform: scaleY(0.9);
+        opacity: 1;
+    }
+}   

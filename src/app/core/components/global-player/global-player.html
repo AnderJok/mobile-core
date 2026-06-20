@@ -1,19 +1,43 @@
 @if(workoutPlayerService.activeWorkout(); as activeWorkout) {
-    <div class="navbar">
-        <span>
-            <p>{{ activeWorkout.name }}</p>
+    <div class="navbar" >
+        <span class="activity-icon">
+            @if(workoutPlayerService.isPlaying()) {
+                <span class="heartbeat-bars">
+                    <div class="animate-heartbeat-bar1"></div>
+                    <div class="animate-heartbeat-bar2"></div>
+                    <div class="animate-heartbeat-bar3"></div>
+                </span>
+            } @else {
+                <span class="activity-icon"><b>II</b></span>
+            }
         </span>
-        <p>{{ workoutPlayerService.isPlaying() ? 'Playing' : 'Paused' }}</p>
+        <span class="workout-info" (click)="goToWorkout()">
+            <div class="exercise-name">
+                <h1 class="exercise-name">Dominadas de tracción</h1>
+            </div>
+            <div>
+                <p class="workout-name">
+                    {{ activeWorkout.name }}
+                </p>
+            </div>
+        </span>
+        <span class="workout-time-reps">
+            00:12
+        </span>
         <span>
-            <button type="button" (click)="workoutPlayerService.togglePlayPause()">
-                {{ workoutPlayerService.isPlaying() ? 'PAUSE' : 'PLAY' }}
+            <button class="action-btn btn-secondary" (click)="workoutPlayerService.togglePlayPause()">
+                {{ workoutPlayerService.isPlaying() ? 'II PAUSE' : '> PLAY' }}
             </button>
         </span>
         <span>
-            <button type="button" (click)="stopWorkout()">STOP</button>
+            <button class="action-btn btn-secondary">
+                > NEXT
+            </button>
         </span>
         <span>
-            <button type="button" (click)="goToWorkout()">Go to Workout</button>
+            <button class="action-btn btn-primary" (click)="stopWorkout()">
+                STOP
+            </button>
         </span>
     </div>
 }
