@@ -1,0 +1,14 @@
+<article class="workouts-container">
+    <section class="search-container">
+        <app-workout-filter></app-workout-filter>
+    </section>
+    <section>
+        <a [routerLink]="['/workout-builder']" class="builder-btn">
+            <span class="material-symbols-outlined">+</span>
+            <span>WORKOUT BUILDER</span>
+        </a>
+    </section>
+    <section>
+        <app-workout-list></app-workout-list>
+    </section>
+</article>
