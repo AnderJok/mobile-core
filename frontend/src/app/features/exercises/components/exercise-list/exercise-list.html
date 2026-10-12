@@ -5,9 +5,6 @@
             <span class="item-name">{{exercise.name}}</span>
             <div class="item-meta">
                 <span class="badge">{{exercise.type}}</span>
-                @for(muscleGroup of exercise.muscleGroups; track muscleGroup.id) {
-                    <span class="tags">{{muscleGroup.name}}</span>
-                }
             </div>
             <div class="item-actions">
                 <button class="action-btn btn-primary" (click)="editExercise(exercise)">
