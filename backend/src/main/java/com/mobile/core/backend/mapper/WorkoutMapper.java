@@ -15,15 +15,12 @@ import java.util.List;
 @RequiredArgsConstructor
 public class WorkoutMapper {
 
-    private final WorkoutTagMapper workoutTagMapper;
-
     public WorkoutDTO toDto(Workout entity) {
         if (entity == null) return null;
         WorkoutDTO dto = new WorkoutDTO();
         dto.setId(entity.getId());
         dto.setName(entity.getName());
         dto.setDescription(entity.getDescription());
-        dto.setTags(workoutTagMapper.mapTagsToDto(entity.getTags()));
         dto.setBlocks(mapBlocksToDto(entity.getBlocks()));
         return dto;
     }
@@ -34,7 +31,6 @@ public class WorkoutMapper {
         workout.setId(dto.getId());
         workout.setName(dto.getName());
         workout.setDescription(dto.getDescription());
-        workout.setTags(workoutTagMapper.mapTagsToEntity(dto.getTags()));
         workout.setBlocks(mapBlocksToEntity(dto.getBlocks()));
         return workout;
     }

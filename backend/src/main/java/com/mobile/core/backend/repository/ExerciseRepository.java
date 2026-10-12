@@ -10,6 +10,6 @@ import java.util.UUID;
 
 @Repository
 public interface ExerciseRepository extends JpaRepository<Exercise, UUID> {
-    @Query("SELECT DISTINCT e FROM Exercise e LEFT JOIN FETCH e.muscleGroups")
-    List<Exercise> findAllWithMuscleGroups();
+    @Query("SELECT e FROM Exercise e WHERE e.deletedAt IS NULL")
+    List<Exercise> findAllActiveExercises();
 }

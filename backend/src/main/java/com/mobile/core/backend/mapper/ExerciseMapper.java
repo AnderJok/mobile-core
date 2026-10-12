@@ -16,7 +16,6 @@ public class ExerciseMapper {
         dto.setId(entity.getId());
         dto.setName(entity.getName());
         dto.setDescription(entity.getDescription());
-        dto.setMuscleGroups(muscleGroupMapper.mapMuscleGroupsToDto(entity.getMuscleGroups()));
         dto.setType(entity.getType());
         dto.setHasVariations(entity.isHasVariations());
         dto.setDefaultValue(entity.getDefaultValue());
@@ -30,7 +29,6 @@ public class ExerciseMapper {
         exercise.setId(dto.getId());
         exercise.setName(dto.getName());
         exercise.setDescription(dto.getDescription());
-        exercise.setMuscleGroups(muscleGroupMapper.mapMuscleGroupsToEntity(dto.getMuscleGroups()));
         exercise.setType(dto.getType());
         exercise.setHasVariations(dto.isHasVariations());
         exercise.setDefaultValue(dto.getDefaultValue());

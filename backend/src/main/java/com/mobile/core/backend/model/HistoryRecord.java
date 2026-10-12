@@ -3,6 +3,7 @@ package com.mobile.core.backend.model;
 import jakarta.persistence.*;
 import lombok.*;
 import java.time.LocalDateTime;
+import java.util.Date;
 import java.util.UUID;
 
 @Entity
@@ -26,4 +27,13 @@ public class HistoryRecord {
     private Integer durationInSeconds;
 
     private String notes;
+
+    @Column(name = "created_at")
+    private Date createdAt;
+
+    @Column(name = "updated_at")
+    private Date updatedAt;
+
+    @Column(name = "deleted_at")
+    private Date deletedAt;
 }

@@ -33,4 +33,10 @@ public class ExerciseController {
     public ResponseEntity<ExerciseDTO> createExercise(@Valid @RequestBody ExerciseDTO exerciseDTO) {
         return new ResponseEntity<>(exerciseService.createExercise(exerciseDTO), HttpStatus.CREATED);
     }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> deleteExercise(@PathVariable UUID id) {
+        exerciseService.deleteExercise(id);
+        return ResponseEntity.noContent().build();
+    }
 }

@@ -33,4 +33,12 @@ export class ExerciseService {
             this.exercisesSignal.set(exercises);
         });
     }
+
+    deleteExerciseById(id: string) {
+        return this.http.delete(this.apiUrl + 'exercises/' + id).pipe(
+            tap(() => {
+                this.exercisesSignal.update(exercises => exercises.filter(exercise => exercise.id !== id));
+            })
+        );
+    }
 }

@@ -2,6 +2,8 @@ package com.mobile.core.backend.model;
 
 import jakarta.persistence.*;
 import lombok.*;
+
+import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 
@@ -22,7 +24,10 @@ public class Exercise {
     @Column(nullable = false)
     private WorkoutEnums.ExerciseType type;
 
+    @Column(name = "has_variations", nullable = false)
     private boolean hasVariations;
+
+    @Column(name = "default_value")
     private Integer defaultValue;
 
     @ElementCollection(fetch = FetchType.EAGER)
@@ -30,11 +35,12 @@ public class Exercise {
     @Column(name = "tag")
     private List<String> tags;
 
-    @ManyToMany
-    @JoinTable(
-            name = "exercise_muscle_groups",
-            joinColumns = @JoinColumn(name = "exercise_id"),
-            inverseJoinColumns = @JoinColumn(name = "muscle_group_id")
-    )
-    private List<MuscleGroup> muscleGroups;
+    @Column(name = "created_at")
+    private Date createdAt;
+
+    @Column(name = "updated_at")
+    private Date updatedAt;
+
+    @Column(name = "deleted_at")
+    private Date deletedAt;
 }

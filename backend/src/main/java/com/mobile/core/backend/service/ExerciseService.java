@@ -23,7 +23,7 @@ public class ExerciseService {
 
     @Transactional(readOnly = true)
     public List<ExerciseDTO> getAllExercises() {
-        return exerciseRepository.findAllWithMuscleGroups().stream()
+        return exerciseRepository.findAllActiveExercises().stream()
                 .map(exerciseMapper::toDto)
                 .collect(Collectors.toList());
     }
@@ -38,7 +38,18 @@ public class ExerciseService {
     @Transactional
     public ExerciseDTO createExercise(ExerciseDTO exerciseDTO) {
         Exercise exercise = exerciseMapper.toEntity(exerciseDTO);
+        exercise.setCreatedAt(new java.util.Date());
         Exercise saved = exerciseRepository.save(exercise);
         return exerciseMapper.toDto(saved);
+    }
+
+    @Transactional
+    public void deleteExercise(UUID id) {
+        if (!exerciseRepository.existsById(id)) {
+            throw new RuntimeException("Exercise not found");
+        }
+        Exercise exercise = exerciseRepository.findById(id).orElseThrow(() -> new RuntimeException("Exercise not found"));
+        exercise.setDeletedAt(new java.util.Date());
+        exerciseRepository.save(exercise);
     }
 }

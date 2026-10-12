@@ -1,6 +1,8 @@
 package com.mobile.core.backend.model;
 import jakarta.persistence.*;
 import lombok.*;
+
+import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 
@@ -17,14 +19,15 @@ public class Workout {
 
     private String description;
 
-    @ManyToMany
-    @JoinTable(
-            name = "workout_tags_mapping",
-            joinColumns = @JoinColumn(name = "workout_id"),
-            inverseJoinColumns = @JoinColumn(name = "tag_id")
-    )
-    private List<WorkoutTag> tags;
-
     @OneToMany(mappedBy = "workout", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<WorkoutBlock> blocks;
+
+    @Column(name = "created_at")
+    private Date createdAt;
+
+    @Column(name = "updated_at")
+    private Date updatedAt;
+
+    @Column(name = "deleted_at")
+    private Date deletedAt;
 }

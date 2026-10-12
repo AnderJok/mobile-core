@@ -2,6 +2,8 @@ package com.mobile.core.backend.model;
 
 import jakarta.persistence.*;
 import lombok.*;
+
+import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 
@@ -23,4 +25,13 @@ public class WorkoutBlock {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "workout_id")
     private Workout workout;
+
+    @Column(name = "created_at")
+    private Date createdAt;
+
+    @Column(name = "updated_at")
+    private Date updatedAt;
+
+    @Column(name = "deleted_at")
+    private Date deletedAt;
 }
