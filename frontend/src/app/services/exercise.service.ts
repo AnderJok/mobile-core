@@ -28,6 +28,16 @@ export class ExerciseService {
         );
     }
 
+    updateExercise(id: string, exercise: Exercise) {
+        return this.http.put<Exercise>(this.apiUrl + 'exercises/' + id, exercise).pipe(
+            tap(updatedExercise => {
+                this.exercisesSignal.update(exercises =>
+                    exercises.map(current => current.id === id ? updatedExercise : current)
+                );
+            })
+        );
+    }
+
     getAllExercises() {
         this.http.get<Exercise[]>(this.apiUrl + 'exercises').subscribe(exercises => {
             this.exercisesSignal.set(exercises);

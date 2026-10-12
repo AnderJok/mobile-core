@@ -34,7 +34,6 @@ export const SEED_EXERCISES: Exercise[] = [
     id: 'ex-1',
     name: 'Press de Banca',
     description: 'Ejercicio de press con barra',
-    muscleGroups: [SEED_MUSCLE_GROUPS[0], SEED_MUSCLE_GROUPS[4]], 
     type: ExerciseType.REPS,
     hasVariations: false,
     tags: ['fuerza', 'tren-superior']
@@ -43,7 +42,6 @@ export const SEED_EXERCISES: Exercise[] = [
     id: 'ex-2',
     name: 'Sentadillas',
     description: 'Ejercicio de piernas clásico',
-    muscleGroups: [SEED_MUSCLE_GROUPS[2], SEED_MUSCLE_GROUPS[3]],
     type: ExerciseType.REPS,
     hasVariations: false,
     tags: ['fuerza', 'tren-inferior']
@@ -52,7 +50,6 @@ export const SEED_EXERCISES: Exercise[] = [
     id: 'ex-3',
     name: 'Zancadas Búlgaras',
     description: 'Sentadilla a una pierna con apoyo trasero',
-    muscleGroups: [SEED_MUSCLE_GROUPS[2]],
     type: ExerciseType.REPS,
     hasVariations: true, // Izquierda y Derecha
     tags: ['fuerza', 'equilibrio', 'tren-inferior']
@@ -61,7 +58,6 @@ export const SEED_EXERCISES: Exercise[] = [
     id: 'ex-4',
     name: 'Plancha',
     description: 'Ejercicio isométrico de abdomen',
-    muscleGroups: [SEED_MUSCLE_GROUPS[5], SEED_MUSCLE_GROUPS[6]],
     type: ExerciseType.TIME,
     hasVariations: false,
     tags: ['resistencia', 'core']
@@ -70,7 +66,6 @@ export const SEED_EXERCISES: Exercise[] = [
     id: 'ex-5',
     name: 'Remo con Barra',
     description: 'Tracción horizontal',
-    muscleGroups: [SEED_MUSCLE_GROUPS[1]],
     type: ExerciseType.REPS,
     hasVariations: false,
     tags: ['fuerza', 'tren-superior']
@@ -79,7 +74,6 @@ export const SEED_EXERCISES: Exercise[] = [
     id: 'ex-6',
     name: 'Suspensión en Regleta (Dead Hang)',
     description: 'Aguante isométrico para fuerza de dedos',
-    muscleGroups: [SEED_MUSCLE_GROUPS[7], SEED_MUSCLE_GROUPS[1]],
     type: ExerciseType.TIME,
     hasVariations: false,
     tags: ['agarre', 'ocr', 'fuerza']
@@ -192,11 +186,9 @@ const SEED_WORKOUT_HISTORY: HistoryRecord[] = [
     providedIn: 'root'
 })
 export class MockService {
-  private muscleGroupsSignal: WritableSignal<MuscleGroup[]> = signal([]);
   private exercisesSignal: WritableSignal<Exercise[]> = signal([]);
   private workoutsSignal: WritableSignal<Workout[]> = signal([]);
 
-  readonly muscleGroups = this.muscleGroupsSignal.asReadonly();
   readonly exercises = this.exercisesSignal.asReadonly();
   readonly workouts = this.workoutsSignal.asReadonly();
 
@@ -205,7 +197,6 @@ export class MockService {
   }
 
   private setDefaultData(): void {
-      this.muscleGroupsSignal.set(SEED_MUSCLE_GROUPS);
       this.exercisesSignal.set(SEED_EXERCISES);
       this.workoutsSignal.set(SEED_WORKOUTS);
       return;

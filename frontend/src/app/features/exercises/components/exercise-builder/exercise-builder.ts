@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, EventEmitter, inject, Input, Output } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ExerciseService } from '../../../../services/exercise.service';
 import { Exercise } from '../../../../shared/interfaces/exercise';
@@ -15,6 +15,26 @@ export class ExerciseBuilder {
   readonly exerciseService = inject(ExerciseService);
 
   readonly ExerciseType = ExerciseType;
+  @Output() readonly finished = new EventEmitter<void>();
+
+  selectedExercise: Exercise | null = null;
+
+  @Input()
+  set exercise(exercise: Exercise | null) {
+    this.selectedExercise = exercise;
+    if (exercise) {
+      this.exerciseForm.patchValue({
+        name: exercise.name,
+        hasVariations: exercise.hasVariations,
+        type: exercise.type,
+        defaultValue: exercise.defaultValue ?? null,
+        description: exercise.description,
+        tags: exercise.tags.join(', '),
+      });
+    } else {
+      this.resetForm();
+    }
+  }
 
   readonly exerciseForm = this.formBuilder.group({
     name: ['', [Validators.required]],
@@ -45,7 +65,8 @@ export class ExerciseBuilder {
           .filter((tag) => tag.length > 0)
       : [];
 
-    const newExercise: Exercise = {
+    const exercise: Exercise = {
+      id: this.selectedExercise?.id,
       name: trimmedName,
       description: formValues.description?.trim() ?? '',
       type: formValues.type ?? ExerciseType.REPS,
@@ -56,24 +77,39 @@ export class ExerciseBuilder {
         !isNaN(Number(formValues.defaultValue))
           ? Number(formValues.defaultValue)
           : undefined,
-      tags,
-      muscleGroups: [],
+      tags
     };
 
-    this.exerciseService.createExercise(newExercise).subscribe({
+    const request = this.selectedExercise?.id
+      ? this.exerciseService.updateExercise(this.selectedExercise.id, exercise)
+      : this.exerciseService.createExercise(exercise);
+
+    request.subscribe({
       next: () => {
-        this.exerciseForm.reset({
-          name: '',
-          hasVariations: false,
-          type: ExerciseType.REPS,
-          defaultValue: null,
-          description: '',
-          tags: '',
-        });
+        this.selectedExercise = null;
+        this.resetForm();
+        this.finished.emit();
       },
       error: (err) => {
-        console.error('Failed to create exercise:', err);
+        console.error('Failed to save exercise:', err);
       },
+    });
+  }
+
+  cancelEditing() {
+    this.selectedExercise = null;
+    this.resetForm();
+    this.finished.emit();
+  }
+
+  private resetForm() {
+    this.exerciseForm.reset({
+      name: '',
+      hasVariations: false,
+      type: ExerciseType.REPS,
+      defaultValue: null,
+      description: '',
+      tags: '',
     });
   }
 }

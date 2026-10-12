@@ -5,7 +5,6 @@ export interface Exercise {
   id?: string;
   name: string;
   description: string;
-  muscleGroups: MuscleGroup[];
   type: ExerciseType;
   hasVariations: boolean;
   defaultValue?: number; 

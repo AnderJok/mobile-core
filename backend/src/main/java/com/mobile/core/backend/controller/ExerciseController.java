@@ -34,6 +34,11 @@ public class ExerciseController {
         return new ResponseEntity<>(exerciseService.createExercise(exerciseDTO), HttpStatus.CREATED);
     }
 
+    @PutMapping("/{id}")
+    public ResponseEntity<ExerciseDTO> updateExercise(@PathVariable UUID id, @Valid @RequestBody ExerciseDTO exerciseDTO) {
+        return ResponseEntity.ok(exerciseService.updateExercise(id, exerciseDTO));
+    }
+
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteExercise(@PathVariable UUID id) {
         exerciseService.deleteExercise(id);

@@ -32,8 +32,13 @@
         </div>
         <div class="col-span-2">
             <button class="save-btn" type="submit">
-                <span class="material-symbols-outlined">save</span>
+                <span class="material-symbols-outlined">
+                {{ selectedExercise ? 'Save changes' : 'Create exercise' }}
+                </span>
             </button>
+            @if (selectedExercise) {
+                <button class="cancel-btn" type="button" (click)="cancelEditing()">Cancel</button>
+            }
         </div>
     </form>
 </div>

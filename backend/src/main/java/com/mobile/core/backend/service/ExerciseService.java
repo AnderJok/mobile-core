@@ -44,6 +44,20 @@ public class ExerciseService {
     }
 
     @Transactional
+    public ExerciseDTO updateExercise(UUID id, ExerciseDTO exerciseDTO) {
+        Exercise exercise = exerciseRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Exercise not found"));
+        exercise.setName(exerciseDTO.getName());
+        exercise.setDescription(exerciseDTO.getDescription());
+        exercise.setType(exerciseDTO.getType());
+        exercise.setHasVariations(exerciseDTO.isHasVariations());
+        exercise.setDefaultValue(exerciseDTO.getDefaultValue());
+        exercise.setTags(exerciseDTO.getTags());
+        exercise.setUpdatedAt(new java.util.Date());
+        return exerciseMapper.toDto(exerciseRepository.save(exercise));
+    }
+
+    @Transactional
     public void deleteExercise(UUID id) {
         if (!exerciseRepository.existsById(id)) {
             throw new RuntimeException("Exercise not found");

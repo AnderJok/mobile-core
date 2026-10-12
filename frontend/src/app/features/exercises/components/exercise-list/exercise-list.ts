@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, EventEmitter, inject, Output } from '@angular/core';
 import { ExerciseService } from '../../../../services/exercise.service';
 import type { Exercise } from '../../../../shared/interfaces/exercise';
 
@@ -10,6 +10,7 @@ import type { Exercise } from '../../../../shared/interfaces/exercise';
 })  
 export class ExerciseList {
     readonly exerciseService = inject(ExerciseService);
+  @Output() readonly editRequested = new EventEmitter<Exercise>();
 
     deleteExercise(exercise: Exercise) {
       if (!exercise?.id) {
@@ -24,5 +25,9 @@ export class ExerciseList {
           console.error('Failed to delete exercise:', err);
         }
       });
+    }
+
+    editExercise(exercise: Exercise) {
+      this.editRequested.emit(exercise);
     }
 }
