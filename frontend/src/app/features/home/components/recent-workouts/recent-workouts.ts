@@ -35,8 +35,4 @@ export class RecentWorkouts {
   startWorkout(workout: Workout) {
     this.workoutPlayerService.playWorkout(workout);
   }
-
-  testBackend() {
-    this.testService.workouts();
-  }
 }

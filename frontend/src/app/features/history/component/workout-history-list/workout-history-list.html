@@ -15,4 +15,7 @@
             </div>
         </li>
     }
+    @if(historyWorkoutList().length === 0) {
+        <li class="no-history">No workout history available</li>
+    }
 </ul>

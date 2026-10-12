@@ -111,3 +111,10 @@
     color: var(--on-surface-variant);
     border-top: 1px solid rgba(255, 255, 255, 0.05);
 }
+
+.no-workouts {
+    text-align: center;
+    color: var(--on-surface-variant);
+    font-size: 14px;
+    font-weight: 500;
+}

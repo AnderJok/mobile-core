@@ -3,7 +3,6 @@
         <h3 class="section-title">My Workouts</h3>
         <span class="section-status">¿status?</span>
     </div>
-    <p>workouts: {{ workoutService.workouts().length }}</p>
     <ul class="workout-cards">
         @for (workout of workoutService.workouts(); track workout.id) {
         <li class="workout-card active-border">
@@ -29,6 +28,9 @@
                 <span class="footer-highlight">PR: 12 Problems</span>
             </div>
         </li>
+        }
+        @if(workoutService.workouts().length === 0) {
+            <li class="no-workouts">No workouts available</li>
         }
     </ul>
 </div>

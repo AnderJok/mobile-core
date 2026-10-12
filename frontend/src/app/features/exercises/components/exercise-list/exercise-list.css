@@ -57,3 +57,10 @@
     align-items: center;
     gap: 0.5rem;
 }
+
+.no-exercises {
+    text-align: center;
+    color: var(--on-surface-variant);
+    font-size: 14px;
+    font-weight: 500;
+}
