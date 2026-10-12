@@ -1,20 +1,34 @@
 <!-- <h2 class="section-title">Manage Exercises</h2> -->
 <div class="exercise-card">
-    <form class="form-grid">
+    <form [formGroup]="exerciseForm" (ngSubmit)="saveExercise()" class="form-grid">
          <div class="field-group">
             <label class="label">Name</label>
-            <input class="input" placeholder="e.g. Weighted Pullups" type="text"/>
+            <input formControlName="name" class="input" placeholder="e.g. Weighted Pull up" type="text"/>
+        </div>
+        <div class="field-group">
+            <label class="label">Has variations</label>
+            <input formControlName="hasVariations" class="input" type="checkbox"/>
         </div>
         <div class="field-group">
             <label class="label">Type</label>
-            <select class="input">
-                <option value="reps">Reps</option>
-                <option value="time">Time</option>
+            <select formControlName="type" class="input">
+                <option [value]="ExerciseType.REPS">Reps</option>
+                <option [value]="ExerciseType.TIME">Time</option>
             </select>
         </div>
+        <div class="field-group">
+            <label class="label">Default value</label>
+            <input formControlName="defaultValue" class="input" placeholder="e.g. 10 or 30" type="number"/>
+        </div>
         <div class="field-group col-span-2">
+            <label class="label">Description</label>
+            <textarea formControlName="description" class="input" placeholder="Describe the exercise"></textarea>
+        </div>
+        <div class="field-group col-span-2">
+            <p>Does it make sense to have tags or muscle groups for an exercise?</p>
             <label class="label">Tags</label>
-            <input class="input" placeholder="Strength, Finger, Grip" type="text"/>
+            <input formControlName="tags" class="input" placeholder="Strength, Finger, Grip" type="text"/>
+            <!-- plus icon to add automatically tags -->
         </div>
         <div class="col-span-2">
             <button class="save-btn" type="submit">
