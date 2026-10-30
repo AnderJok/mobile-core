@@ -18,4 +18,11 @@ export class ActiveWorkout {
       this.router.navigate(['/home']);
     }
   }
+
+  previousStep() {
+    this.workoutPlayerService.previousStep();
+    if (!this.workoutPlayerService.activeWorkout()) {
+      this.router.navigate(['/home']);
+    }
+  }
 }

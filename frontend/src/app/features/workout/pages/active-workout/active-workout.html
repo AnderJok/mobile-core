@@ -50,15 +50,19 @@
             </div>
         </section>
 
+        <button type="button" class="btn btn-secondary" (click)="previousStep()">Previous</button>
         <button type="button" class="btn btn-primary" (click)="nextStep()">Next</button>
     }
 
     <div class="actions">
-        <button type="button" class="btn btn-secondary" (click)="workoutPlayerService.togglePlayPause()">
+        <button type="button" class="btn btn-tertiary" (click)="workoutPlayerService.togglePlayPause()">
             {{ workoutPlayerService.isPlaying() ? 'Pause' : 'Play' }}
         </button>
         <a href="/home" class="btn btn-danger" (click)="workoutPlayerService.stopWorkout()">
             Stop Workout
         </a>
+    </div>
+    <div class="timer-container">
+        {{ workoutPlayerService.elapsedLabel() }}
     </div>
 </div>
