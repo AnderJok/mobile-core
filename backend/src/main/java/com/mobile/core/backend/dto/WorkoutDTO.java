@@ -1,6 +1,7 @@
 package com.mobile.core.backend.dto;
 
-import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.Valid;
+import jakarta.validation.constraints.*;
 import lombok.Data;
 
 import java.util.List;
@@ -11,11 +12,16 @@ public class WorkoutDTO {
     private UUID id;
 
     @NotBlank(message = "Workout name is required")
+    @Size(max = 255)
     private String name;
 
+    @Size(max = 255)
     private String description;
 
-    private List<WorkoutTagDTO> tags;
+    @Valid
+    private List<@NotNull WorkoutTagDTO> tags;
 
-    private List<WorkoutBlockDTO> blocks;
+    @Valid
+    @NotEmpty
+    private List<@NotNull WorkoutBlockDTO> blocks;
 }

@@ -1,8 +1,41 @@
-<p>workout-view works!</p>
-<h1>Calistenics workout</h1>
-<ul>
-    <li>Push-ups - 3 sets of 10 reps</li>
-    <li>Pull-ups - 3 sets of 5 reps</li>
-    <li>Squats - 3 sets of 15 reps</li>
-    <li>Plank - 3 sets of 30 seconds</li>
-</ul>
+<article class="workout-detail">
+    <a routerLink="/workouts">Back to workouts</a>
+    @if (loading()) {
+        <p role="status">Loading workout...</p>
+    }
+    @if (error()) {
+        <p role="alert">{{ error() }}</p>
+        <button type="button" class="action-btn btn-secondary" (click)="loadWorkout()">Retry</button>
+    }
+    @if (workout(); as current) {
+        <h1>{{ current.name }}</h1>
+        <p>{{ current.description }}</p>
+        <div class="tags">
+            @for (tag of current.tags; track tag.id) {
+                <span>{{ tag.name }}</span>
+            }
+        </div>
+        <a [routerLink]="['/workout-builder', current.id]" class="action-btn btn-primary">Edit workout</a>
+        @for (block of current.blocks; track block.id; let bi = $index) {
+            <section class="exercise-card">
+                <h2>Block {{ bi + 1 }} &middot; {{ block.rounds }} rounds</h2>
+                <p>Rest between exercises: {{ block.restBetweenExercises }} s</p>
+                <p>Rest between rounds: {{ block.restBetweenRounds }} s</p>
+                <ol>
+                    @for (instance of block.exercises; track instance.id) {
+                        <li>
+                            {{ instance.exercise.name }} &mdash;
+                            {{ instance.targetValue }} {{ instance.exercise.type === 'TIME' ? 'seconds' : 'reps' }}
+                            @if (instance.weight != null) {
+                                &middot; {{ instance.weight }} kg
+                            }
+                        </li>
+                    }
+                </ol>
+                @if (!$last) {
+                    <p>Rest before next block: {{ block.restAfterBlock }} s</p>
+                }
+            </section>
+        }
+    }
+</article>

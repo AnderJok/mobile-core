@@ -91,6 +91,7 @@ export const SEED_WORKOUTS: Workout[] = [
         id: 'blk-1-1',
         rounds: 3, // Repetir este bloque 3 veces
         restBetweenRounds: 120, // 2 minutos al acabar la vuelta
+        restAfterBlock: 0,
         exercises: [
           {
             id: 'inst-1',
@@ -119,6 +120,7 @@ export const SEED_WORKOUTS: Workout[] = [
         id: 'blk-2-1',
         rounds: 4,
         restBetweenRounds: 60,
+        restAfterBlock: 0,
         exercises: [
           {
             id: 'inst-3',

@@ -18,8 +18,12 @@ public class WorkoutBlock {
     private Integer rounds;
     private Integer restBetweenRounds;
     private Integer restBetweenExercises;
+    @Builder.Default
+    @Column(nullable = false)
+    private Integer restAfterBlock = 0;
 
     @OneToMany(mappedBy = "workoutBlock", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OrderColumn(name = "exercise_position")
     private List<ExerciseInstance> exercises;
 
     @ManyToOne(fetch = FetchType.LAZY)

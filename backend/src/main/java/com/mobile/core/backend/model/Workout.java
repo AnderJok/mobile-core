@@ -20,7 +20,14 @@ public class Workout {
     private String description;
 
     @OneToMany(mappedBy = "workout", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OrderColumn(name = "block_position")
     private List<WorkoutBlock> blocks;
+
+    @ManyToMany
+    @JoinTable(name = "workout_tag_links",
+            joinColumns = @JoinColumn(name = "workout_id"),
+            inverseJoinColumns = @JoinColumn(name = "tag_id"))
+    private List<WorkoutTag> tags;
 
     @Column(name = "created_at")
     private Date createdAt;

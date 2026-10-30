@@ -6,4 +6,5 @@ export interface WorkoutBlock {
   restBetweenRounds: number;
   exercises: ExerciseInstance[];
   restBetweenExercises: number;
+  restAfterBlock: number;
 }

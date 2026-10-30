@@ -15,6 +15,8 @@ export class ExerciseService {
 
     private exercisesSignal = signal<Exercise[]>([]);
     readonly exercises = this.exercisesSignal.asReadonly();
+    readonly loadError = signal('');
+    readonly loading = signal(false);
 
     constructor() {
         this.getAllExercises();
@@ -39,8 +41,18 @@ export class ExerciseService {
     }
 
     getAllExercises() {
-        this.http.get<Exercise[]>(this.apiUrl + 'exercises').subscribe(exercises => {
-            this.exercisesSignal.set(exercises);
+        this.loading.set(true);
+        this.loadError.set('');
+        this.http.get<Exercise[]>(this.apiUrl + 'exercises').subscribe({
+            next: exercises => {
+                this.exercisesSignal.set(exercises);
+                this.loading.set(false);
+            },
+            error: error => {
+                console.error('Failed to load exercises:', error);
+                this.loadError.set('Could not load exercises. Please retry.');
+                this.loading.set(false);
+            }
         });
     }
 

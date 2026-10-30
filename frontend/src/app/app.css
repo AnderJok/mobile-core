@@ -7,6 +7,7 @@ header {
 
 .main-container {
     padding: var(--container-padding);
+    padding-bottom: calc(var(--container-padding) + 8rem);
     max-width: 42rem;
     margin-left: auto;
     margin-right: auto;
@@ -18,4 +19,9 @@ footer {
     width: 100%;
     z-index: 1000;
     padding: 2rem;
+    pointer-events: none;
+}
+
+footer app-global-player {
+    pointer-events: auto;
 }

@@ -1,0 +1,15 @@
+.workout-detail {
+    max-width: 960px;
+    margin: 0 auto;
+    padding: var(--container-padding);
+    display: flex;
+    flex-direction: column;
+    gap: var(--gap-md);
+}
+
+h1 { font-size: 1.5rem; }
+h2 { font-size: 1.25rem; }
+a { color: var(--primary); }
+ol { list-style: decimal; padding-left: 1.5rem; margin: var(--gap-md) 0; }
+.tags { display: flex; flex-wrap: wrap; gap: var(--gap-sm); }
+.tags span { background: var(--surface); padding: 0.25rem 0.75rem; border-radius: 0.5rem; }

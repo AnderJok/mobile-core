@@ -1,8 +1,18 @@
 <div class="workout-list">
     <div class="section-header">
         <h3 class="section-title">My Workouts</h3>
-        <span class="section-status">¿status?</span>
+        <span class="section-status">{{ workoutService.workouts().length }} workouts</span>
     </div>
+    @if (workoutService.loading()) {
+        <p role="status">Loading workouts...</p>
+    }
+    @if (workoutService.loadError()) {
+        <p role="alert">{{ workoutService.loadError() }}</p>
+        <button type="button" class="action-btn btn-secondary" (click)="workoutService.getAllWorkouts()">Retry</button>
+    }
+    @if (error()) {
+        <p role="alert">{{ error() }}</p>
+    }
     <ul class="workout-cards">
         @for (workout of workoutService.workouts(); track workout.id) {
         <li class="workout-card active-border">
@@ -20,16 +30,28 @@
                 </div>
                 <div class="workout-card-actions">
                     <button class="action-btn btn-primary" (click)="startWorkout(workout)">Start</button>
-                    <a [routerLink]="['/workout-view', workout.id]" class="action-btn btn-secondary">Edit</a>
+                    <a [routerLink]="['/workout-view', workout.id]" class="action-btn btn-secondary">View</a>
+                    <a [routerLink]="['/workout-builder', workout.id]" class="action-btn btn-secondary">Edit</a>
+                    <button type="button" class="action-btn btn-secondary" [disabled]="!!deleting()" (click)="pendingDelete.set(workout.id)">Delete</button>
                 </div>
+                @if (pendingDelete() === workout.id) {
+                    <div role="group" aria-label="Confirm workout deletion">
+                        <p>Delete "{{ workout.name }}"?</p>
+                        <div class="workout-card-actions">
+                            <button type="button" class="action-btn btn-primary" [disabled]="!!deleting()" (click)="deleteWorkout(workout)">
+                                {{ deleting() === workout.id ? 'Deleting...' : 'Confirm delete' }}
+                            </button>
+                            <button type="button" class="action-btn btn-secondary" [disabled]="!!deleting()" (click)="pendingDelete.set(null)">Cancel</button>
+                        </div>
+                    </div>
+                }
             </div>
             <div class="workout-card-footer">
-                <span>Last completed: 2 days ago</span>
-                <span class="footer-highlight">PR: 12 Problems</span>
+                <span>{{ workout.blocks.length }} blocks</span>
             </div>
         </li>
         }
-        @if(workoutService.workouts().length === 0) {
+        @if(!workoutService.loading() && !workoutService.loadError() && workoutService.workouts().length === 0) {
             <li class="no-workouts">No workouts available</li>
         }
     </ul>

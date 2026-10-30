@@ -1,6 +1,7 @@
 package com.mobile.core.backend.dto;
 
-import jakarta.validation.constraints.NotNull;
+import jakarta.validation.Valid;
+import jakarta.validation.constraints.*;
 import lombok.Data;
 
 import java.util.List;
@@ -12,11 +13,22 @@ public class WorkoutBlockDTO {
     private UUID id;
 
     @NotNull
+    @Positive
     private Integer rounds;
 
-    private Integer restBetweenRounds;
+    @NotNull
+    @PositiveOrZero
+    private Integer restBetweenRounds = 0;
 
-    private List<ExerciseInstanceDTO> exercises;
+    @Valid
+    @NotEmpty
+    private List<@NotNull ExerciseInstanceDTO> exercises;
 
-    private Integer restBetweenExercises;
+    @NotNull
+    @PositiveOrZero
+    private Integer restBetweenExercises = 0;
+
+    @NotNull
+    @PositiveOrZero
+    private Integer restAfterBlock = 0;
 }

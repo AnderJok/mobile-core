@@ -21,6 +21,10 @@ export const routes: Routes = [
         loadComponent: () => import('./features/workout/pages/workout-view/workout-view').then((m) => m.WorkoutView),
     },
     {
+        path: 'workout-builder/:id',
+        loadComponent: () => import('./features/workout/pages/workout-builder/workout-builder').then((m) => m.WorkoutBuilder),
+    },
+    {
         path: 'workout-builder',
         loadComponent: () => import('./features/workout/pages/workout-builder/workout-builder').then((m) => m.WorkoutBuilder),
     },
