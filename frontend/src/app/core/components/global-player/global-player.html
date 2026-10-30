@@ -35,17 +35,20 @@
                 <small>{{ step.weight }} kg</small>
             }
         </span>
-        <span>
+        <span class="player-actions">
+            <button
+                class="action-btn btn-secondary"
+                [disabled]="workoutPlayerService.stepNumber() <= 1"
+                (click)="previousStep()"
+            >
+                < PREVIOUS
+            </button>
             <button class="action-btn btn-secondary" (click)="workoutPlayerService.togglePlayPause()">
                 {{ workoutPlayerService.isPlaying() ? 'II PAUSE' : '> PLAY' }}
             </button>
-        </span>
-        <span>
             <button class="action-btn btn-secondary" (click)="nextStep()">
                 > NEXT
             </button>
-        </span>
-        <span>
             <button class="action-btn btn-primary" (click)="stopWorkout()">
                 STOP
             </button>

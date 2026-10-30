@@ -61,6 +61,16 @@ export class WorkoutPlayerService {
         this.stepIndex.update(index => index + 1);
     }
 
+    previousStep() {
+        if (!this.currentStep()) {
+            return;
+        }
+        if (this.stepIndex() === 0) {
+            return;
+        }
+        this.stepIndex.update(index => index - 1);
+    }
+
     private buildSteps(workout: Workout): ActiveStep[] {
         const steps: ActiveStep[] = [];
 

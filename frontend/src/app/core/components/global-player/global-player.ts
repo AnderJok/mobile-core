@@ -30,4 +30,8 @@ export class GlobalPlayer {
       this.router.navigate(['/home']);
     }
   }
+
+  previousStep() {
+    this.workoutPlayerService.previousStep();
+  }
 }
