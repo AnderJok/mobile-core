@@ -1,4 +1,7 @@
 <ol class="items-list">
+    @if (error()) {
+        <li role="alert">{{ error() }}</li>
+    }
     @for (exercise of exerciseService.exercises(); track exercise.id) {
     <li class="exercise-card list-item featured">
         <div class="item-info">
@@ -7,13 +10,24 @@
                 <span class="badge">{{exercise.type}}</span>
             </div>
             <div class="item-actions">
-                <button class="action-btn btn-primary" (click)="editExercise(exercise)">
+                <button class="action-btn btn-primary" (click)="editExercise(exercise)" [disabled]="!!deleting()">
                     <span class="material-symbols-outlined">Edit</span>
                 </button>
-                <button class="action-btn btn-secondary" (click)="deleteExercise(exercise)">
+                <button type="button" class="action-btn btn-secondary" [disabled]="!!deleting()" (click)="pendingDelete.set(exercise.id ?? null)">
                     <span class="material-symbols-outlined">Delete</span>
                 </button>
             </div>
+            @if (pendingDelete() === exercise.id) {
+                <div role="group" aria-label="Confirm exercise deletion">
+                    <p>Delete "{{ exercise.name }}"?</p>
+                    <div class="item-actions">
+                        <button type="button" class="action-btn btn-primary" [disabled]="!!deleting()" (click)="deleteExercise(exercise)">
+                            {{ deleting() === exercise.id ? 'Deleting...' : 'Confirm delete' }}
+                        </button>
+                        <button type="button" class="action-btn btn-secondary" [disabled]="!!deleting()" (click)="pendingDelete.set(null)">Cancel</button>
+                    </div>
+                </div>
+            }
         </div>
     </li>
     }
