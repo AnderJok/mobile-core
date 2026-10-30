@@ -48,6 +48,11 @@ describe('WorkoutPlayerService', () => {
         };
     });
 
+    afterEach(() => {
+        service.stopWorkout();
+        vi.useRealTimers();
+    });
+
     it('visits every exercise and round in order, inserting only the rest for each boundary', () => {
         const original = structuredClone(workout);
         service.playWorkout(workout);
@@ -168,6 +173,56 @@ describe('WorkoutPlayerService', () => {
         service.playWorkout(workout);
         expect(service.error()).toBe('');
         log.mockRestore();
+    });
+
+    it('runs a session timer that pauses, resumes and freezes on stop', () => {
+        vi.useFakeTimers();
+        vi.setSystemTime(new Date('2026-01-01T00:00:00.000Z'));
+        service.playWorkout(workout);
+        expect(service.elapsedLabel()).toBe('00:00');
+
+        vi.advanceTimersByTime(65_000);
+        expect(service.elapsedMs()).toBe(65_000);
+        expect(service.elapsedLabel()).toBe('01:05');
+
+        service.togglePlayPause();
+        vi.advanceTimersByTime(10_000);
+        expect(service.elapsedMs()).toBe(65_000);
+        expect(service.elapsedLabel()).toBe('01:05');
+
+        service.togglePlayPause();
+        vi.advanceTimersByTime(4_000);
+        expect(service.elapsedMs()).toBe(69_000);
+        expect(service.elapsedLabel()).toBe('01:09');
+
+        service.stopWorkout();
+        vi.advanceTimersByTime(8_000);
+        expect(service.elapsedMs()).toBe(69_000);
+        expect(service.elapsedLabel()).toBe('01:09');
+        vi.useRealTimers();
+    });
+
+    it('restarts the session timer when a new workout starts and freezes it after the last step', () => {
+        vi.useFakeTimers();
+        vi.setSystemTime(new Date('2026-01-01T00:00:00.000Z'));
+        service.playWorkout(workout);
+        vi.advanceTimersByTime(12_000);
+        expect(service.elapsedLabel()).toBe('00:12');
+
+        const another = { ...workout, id: 'another', blocks: [workout.blocks[1]] };
+        service.playWorkout(another);
+        expect(service.elapsedLabel()).toBe('00:00');
+        vi.advanceTimersByTime(3_000);
+        expect(service.elapsedLabel()).toBe('00:03');
+
+        while (service.upcomingStep()) {
+            service.nextStep();
+        }
+        service.nextStep();
+        expect(service.activeWorkout()).toBeNull();
+        vi.advanceTimersByTime(5_000);
+        expect(service.elapsedLabel()).toBe('00:03');
+        vi.useRealTimers();
     });
 
     it('rejects empty blocks and invalid rounds instead of creating an empty session', () => {

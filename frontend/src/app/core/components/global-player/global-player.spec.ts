@@ -36,6 +36,7 @@ describe('GlobalPlayer workout progression', () => {
         player.detectChanges();
         page.detectChanges();
         expect(player.nativeElement.textContent).toContain('Press de Banca');
+        expect(player.nativeElement.textContent).toContain('00:00');
         expect(player.nativeElement.textContent).toContain('10 reps');
         expect(page.nativeElement.textContent).toContain('Press de Banca');
         const buttons = Array.from<HTMLButtonElement>(player.nativeElement.querySelectorAll('button'));

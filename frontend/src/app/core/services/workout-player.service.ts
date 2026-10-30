@@ -9,8 +9,13 @@ export class WorkoutPlayerService {
     readonly isPlaying = signal<boolean>(false);
     readonly activeWorkout = signal<Workout | null>(null);
     readonly error = signal('');
+    readonly elapsedMs = signal(0);
+    readonly elapsedLabel = computed(() => formatElapsed(this.elapsedMs()));
     private readonly steps = signal<ActiveStep[]>([]);
     private readonly stepIndex = signal(0);
+    private elapsedOffsetMs = 0;
+    private runningSinceMs: number | null = null;
+    private ticker: ReturnType<typeof setInterval> | null = null;
     readonly currentStep = computed(() => this.steps()[this.stepIndex()] ?? null);
     readonly upcomingStep = computed(() => this.steps()[this.stepIndex() + 1] ?? null);
     readonly stepNumber = computed(() => this.currentStep() ? this.stepIndex() + 1 : 0);
@@ -34,9 +39,11 @@ export class WorkoutPlayerService {
         this.stepIndex.set(0);
         this.activeWorkout.set(workout);
         this.isPlaying.set(true);
+        this.resetAndStartTimer();
     }
 
     stopWorkout() {
+        this.pauseTimer();
         this.isPlaying.set(false);
         this.activeWorkout.set(null);
         this.steps.set([]);
@@ -45,8 +52,14 @@ export class WorkoutPlayerService {
     }
 
     togglePlayPause() {
-        if (this.activeWorkout()) {
-            this.isPlaying.update(isPlaying => !isPlaying);
+        if (!this.activeWorkout()) {
+            return;
+        }
+        this.isPlaying.update(isPlaying => !isPlaying);
+        if (this.isPlaying()) {
+            this.resumeTimer();
+        } else {
+            this.pauseTimer();
         }
     }
 
@@ -112,4 +125,46 @@ export class WorkoutPlayerService {
 
         return steps;
     }
+
+    private resetAndStartTimer() {
+        this.clearTicker();
+        this.elapsedOffsetMs = 0;
+        this.elapsedMs.set(0);
+        this.resumeTimer();
+    }
+
+    private resumeTimer() {
+        this.runningSinceMs = Date.now();
+        this.syncElapsed();
+        this.clearTicker();
+        this.ticker = setInterval(() => this.syncElapsed(), 250);
+    }
+
+    private pauseTimer() {
+        this.syncElapsed();
+        this.elapsedOffsetMs = this.elapsedMs();
+        this.runningSinceMs = null;
+        this.clearTicker();
+    }
+
+    private syncElapsed() {
+        if (this.runningSinceMs === null) {
+            return;
+        }
+        this.elapsedMs.set(this.elapsedOffsetMs + (Date.now() - this.runningSinceMs));
+    }
+
+    private clearTicker() {
+        if (this.ticker !== null) {
+            clearInterval(this.ticker);
+            this.ticker = null;
+        }
+    }
+}
+
+function formatElapsed(ms: number): string {
+    const totalSeconds = Math.max(0, Math.floor(ms / 1000));
+    const minutes = Math.floor(totalSeconds / 60);
+    const seconds = totalSeconds % 60;
+    return `${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
 }

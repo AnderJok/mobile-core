@@ -15,6 +15,9 @@
                 <span class="activity-icon"><b>II</b></span>
             }
         </span>
+        <span class="session-timer" aria-live="polite" aria-label="Workout time">
+            {{ workoutPlayerService.elapsedLabel() }}
+        </span>
         <span class="workout-info" (click)="goToWorkout()">
             <div class="exercise-name">
                 <h1 class="exercise-name">
