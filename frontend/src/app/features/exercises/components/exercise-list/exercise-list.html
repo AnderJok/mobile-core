@@ -6,8 +6,14 @@
     <li class="exercise-card list-item featured">
         <div class="item-info">
             <span class="item-name">{{exercise.name}}</span>
+            <div class="item-description">
+                {{exercise.description}}
+            </div>
             <div class="item-meta">
                 <span class="badge">{{exercise.type}}</span>
+                @if (exercise.hasVariations) {
+                    <span class="badge variations">{{'L/R'}}</span>
+                }
             </div>
             <div class="item-actions">
                 <button class="action-btn btn-primary" (click)="editExercise(exercise)" [disabled]="!!deleting()">

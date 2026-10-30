@@ -36,6 +36,7 @@
 }
 
 .badge {
+    align-self: center;
     background-color: var(--surface);
     padding: 0.125rem 0.5rem;
     border-radius: 0.25rem;
@@ -44,6 +45,11 @@
     color: var(--primary);
     letter-spacing: 0.05em;
     text-transform: uppercase;
+}
+
+.variations {
+    background-color: var(--slate);
+    color: var(--surface);
 }
 
 .tags {
