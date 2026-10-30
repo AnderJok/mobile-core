@@ -1,4 +1,5 @@
 import { Component, inject } from '@angular/core';
+import { Router } from '@angular/router';
 import { WorkoutPlayerService } from '../../../../core/services/workout-player.service';
 
 @Component({
@@ -9,4 +10,12 @@ import { WorkoutPlayerService } from '../../../../core/services/workout-player.s
 })
 export class ActiveWorkout {
   workoutPlayerService = inject(WorkoutPlayerService);
+  private readonly router = inject(Router);
+
+  nextStep() {
+    this.workoutPlayerService.nextStep();
+    if (!this.workoutPlayerService.activeWorkout()) {
+      this.router.navigate(['/home']);
+    }
+  }
 }

@@ -6,5 +6,5 @@ export const activeWorkoutGuard: CanActivateFn = () => {
     const workoutPlayerService = inject(WorkoutPlayerService);
     const router = inject(Router);
 
-    return workoutPlayerService.isPlaying() ? true : router.createUrlTree(['/home']);
+    return workoutPlayerService.activeWorkout() ? true : router.createUrlTree(['/home']);
 };

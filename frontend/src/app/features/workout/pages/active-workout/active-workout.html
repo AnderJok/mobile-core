@@ -1,12 +1,64 @@
-<div>
-    <h1>Active Workout</h1>
-    <hr>
-    <p>Name: {{ workoutPlayerService.activeWorkout()?.name }}</p>
-    <p>Status: {{ workoutPlayerService.isPlaying() ? 'Playing' : 'Paused' }}</p>
-    <button (click)="workoutPlayerService.togglePlayPause()">
-        {{ workoutPlayerService.isPlaying() ? 'Pause' : 'Play' }}
-    </button>
-    <a href="/home" (click)="workoutPlayerService.stopWorkout()">
-        Stop Workout
-    </a>
+<div class="active-workout">
+    <header class="workout-header">
+        <div>
+            <h1>Active Workout</h1>
+            <p class="workout-name">{{ workoutPlayerService.activeWorkout()?.name }}</p>
+        </div>
+        <span class="status" [class.status-playing]="workoutPlayerService.isPlaying()">
+            {{ workoutPlayerService.isPlaying() ? 'Playing' : 'Paused' }}
+        </span>
+    </header>
+
+    @if (workoutPlayerService.currentStep(); as step) {
+        <section class="card current-step">
+            <p class="eyebrow">
+                Block {{ step.blockIndex + 1 }}/{{ workoutPlayerService.activeWorkout()?.blocks?.length }}
+                · Round {{ step.roundIndex + 1 }}/{{ workoutPlayerService.currentBlock()?.rounds }}
+            </p>
+            <h2>{{ step.name }}{{ step.side === 'NONE' ? '' : ' (' + step.side + ')' }}</h2>
+
+            <div class="stats">
+                <div class="stat">
+                    <span class="stat-label">Target</span>
+                    <span class="stat-value">{{ step.targetValue }} {{ step.valueType === 'TIME' ? 's' : 'reps' }}</span>
+                </div>
+                @if (step.weight) {
+                    <div class="stat">
+                        <span class="stat-label">Weight</span>
+                        <span class="stat-value">{{ step.weight }} kg</span>
+                    </div>
+                }
+            </div>
+
+            @if (step.description) {
+                <p class="description">{{ step.description }}</p>
+            }
+        </section>
+
+        <section class="card progress">
+            <div class="progress-row">
+                <span class="stat-label">Step</span>
+                <span class="stat-value">{{ workoutPlayerService.stepNumber() }}/{{ workoutPlayerService.totalSteps() }}</span>
+            </div>
+            <div class="progress-row">
+                <span class="stat-label">Next</span>
+                @if (workoutPlayerService.upcomingStep(); as next) {
+                    <span class="stat-value">{{ next.name }}{{ next.side === 'NONE' ? '' : ' (' + next.side + ')' }}</span>
+                } @else {
+                    <span class="stat-value">Last step</span>
+                }
+            </div>
+        </section>
+
+        <button type="button" class="btn btn-primary" (click)="nextStep()">Next</button>
+    }
+
+    <div class="actions">
+        <button type="button" class="btn btn-secondary" (click)="workoutPlayerService.togglePlayPause()">
+            {{ workoutPlayerService.isPlaying() ? 'Pause' : 'Play' }}
+        </button>
+        <a href="/home" class="btn btn-danger" (click)="workoutPlayerService.stopWorkout()">
+            Stop Workout
+        </a>
+    </div>
 </div>

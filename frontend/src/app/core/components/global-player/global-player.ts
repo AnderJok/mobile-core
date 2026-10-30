@@ -23,4 +23,11 @@ export class GlobalPlayer {
     this.workoutPlayerService.stopWorkout();
     this.router.navigate(['/home']);
   }
+
+  nextStep() {
+    this.workoutPlayerService.nextStep();
+    if (!this.workoutPlayerService.activeWorkout()) {
+      this.router.navigate(['/home']);
+    }
+  }
 }

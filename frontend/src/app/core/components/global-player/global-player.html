@@ -1,4 +1,8 @@
+@if (workoutPlayerService.error()) {
+    <p role="alert">{{ workoutPlayerService.error() }}</p>
+}
 @if(workoutPlayerService.activeWorkout(); as activeWorkout) {
+    @if (workoutPlayerService.currentStep(); as step) {
     <div class="navbar" >
         <span class="activity-icon">
             @if(workoutPlayerService.isPlaying()) {
@@ -13,16 +17,23 @@
         </span>
         <span class="workout-info" (click)="goToWorkout()">
             <div class="exercise-name">
-                <h1 class="exercise-name">Dominadas de tracción</h1>
+                <h1 class="exercise-name">
+                    {{ step.name }}{{ step.side === 'NONE' ? '' : ' (' + step.side + ')' }}
+                </h1>
             </div>
             <div>
                 <p class="workout-name">
                     {{ activeWorkout.name }}
+                    · Block {{ step.blockIndex + 1 }}/{{ activeWorkout.blocks.length }}
+                    · Round {{ step.roundIndex + 1 }}/{{ workoutPlayerService.currentBlock()?.rounds }}
                 </p>
             </div>
         </span>
         <span class="workout-time-reps">
-            00:12
+            {{ step.targetValue }} {{ step.valueType === 'TIME' ? 's' : 'reps' }}
+            @if (step.weight) {
+                <small>{{ step.weight }} kg</small>
+            }
         </span>
         <span>
             <button class="action-btn btn-secondary" (click)="workoutPlayerService.togglePlayPause()">
@@ -30,7 +41,7 @@
             </button>
         </span>
         <span>
-            <button class="action-btn btn-secondary">
+            <button class="action-btn btn-secondary" (click)="nextStep()">
                 > NEXT
             </button>
         </span>
@@ -40,4 +51,5 @@
             </button>
         </span>
     </div>
+    }
 }
