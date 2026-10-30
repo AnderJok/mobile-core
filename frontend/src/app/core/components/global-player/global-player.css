@@ -108,6 +108,14 @@
     animation: heartbeat 1.5s ease-in-out infinite 0.3s;
 }
 
+.step-type-exercise {
+    background-color: var(--on-primary-container);
+}
+
+.step-type-rest {
+    background-color: var(--slate);
+}
+
 @keyframes heartbeat {
     0%,
     100% {

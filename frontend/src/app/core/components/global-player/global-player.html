@@ -3,7 +3,7 @@
 }
 @if(workoutPlayerService.activeWorkout(); as activeWorkout) {
     @if (workoutPlayerService.currentStep(); as step) {
-    <div class="navbar" >
+    <div class="navbar" [class]="'step-type-' + step.type.toLowerCase()">
         <span class="activity-icon">
             @if(workoutPlayerService.isPlaying()) {
                 <span class="heartbeat-bars">
