@@ -1,30 +1,18 @@
-import { Component, computed, inject, signal } from '@angular/core';
-import { HistoryRecord } from '../../../../shared/interfaces/history-record';
-import { MockService } from '../../../../core/services/mock.service';
-import { Workout } from '../../../../shared/interfaces/workout';
+import { Component, inject } from '@angular/core';
 import { DatePipe } from '@angular/common';
+import { HistoryService } from '../../../../services/history.service';
+import { DurationPipe } from '../../../../shared/pipes/duration.pipe';
 
 @Component({
   selector: 'app-workout-history-list',
-  imports: [DatePipe],
+  imports: [DatePipe, DurationPipe],
   templateUrl: './workout-history-list.html',
   styleUrl: './workout-history-list.css',
 })
 export class WorkoutHistoryList {
-    mockService = inject(MockService);
-    private historyRecords = signal<HistoryRecord[]>([]);
-
-    historyWorkoutList = computed(() => {
-      return this.historyRecords()
-        .map(record => {
-          const workout = this.mockService.workouts().find(w => w.id === record.workoutId);
-          return workout ? { workout, date: record.date } : null;
-        })
-        .filter((item): item is { workout: Workout; date: Date } => item !== null);
-    })
-    
+    readonly historyService = inject(HistoryService);
 
     ngOnInit() {
-      this.historyRecords.set(this.mockService.getAllHistoryRecords());
+      this.historyService.getAllHistoryRecords();
     }
 }

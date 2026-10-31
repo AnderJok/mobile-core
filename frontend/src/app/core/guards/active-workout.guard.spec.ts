@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { provideHttpClient } from '@angular/common/http';
+import { provideHttpClientTesting } from '@angular/common/http/testing';
 import { TestBed } from '@angular/core/testing';
 import { provideRouter, Router } from '@angular/router';
 import { RouterTestingHarness } from '@angular/router/testing';
@@ -12,7 +14,7 @@ class RoutePage {}
 describe('activeWorkoutGuard', () => {
     beforeEach(() => {
         TestBed.configureTestingModule({
-            providers: [provideRouter([
+            providers: [provideHttpClient(), provideHttpClientTesting(), provideRouter([
                 { path: 'home', component: RoutePage },
                 { path: 'active-workout/:id', component: RoutePage, canActivate: [activeWorkoutGuard] },
             ])],

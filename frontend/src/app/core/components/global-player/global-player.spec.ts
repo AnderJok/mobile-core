@@ -63,6 +63,11 @@ describe('GlobalPlayer workout progression', () => {
         expect(service.activeWorkout()).toBeNull();
         expect(player.nativeElement.querySelector('.navbar')).toBeNull();
         expect(navigate).toHaveBeenCalledWith(['/home']);
+        const history = http.expectOne(environment.apiUrl + 'history-records');
+        expect(history.request.method).toBe('POST');
+        expect(history.request.body).toEqual(expect.objectContaining({
+            workoutId: workout.id, workoutName: workout.name,
+        }));
         http.verify();
     });
 
@@ -92,6 +97,12 @@ describe('GlobalPlayer workout progression', () => {
         expect(service.isPlaying()).toBe(false);
         expect(player.nativeElement.querySelector('.navbar')).toBeNull();
         expect(navigate).toHaveBeenCalledWith(['/home']);
+        const request = TestBed.inject(HttpTestingController).expectOne(environment.apiUrl + 'history-records');
+        expect(request.request.method).toBe('POST');
+        expect(request.request.body).toEqual(expect.objectContaining({
+            workoutId: SEED_WORKOUTS[0].id, workoutName: SEED_WORKOUTS[0].name, durationInSeconds: 0,
+        }));
+        expect(request.request.body.date).toMatch(/^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}$/);
     });
 
     it('finishes from the active workout page after the last exercise', () => {
@@ -109,5 +120,6 @@ describe('GlobalPlayer workout progression', () => {
         expect(service.activeWorkout()).toBeNull();
         expect(service.currentStep()).toBeNull();
         expect(navigate).toHaveBeenCalledWith(['/home']);
+        TestBed.inject(HttpTestingController).expectOne(environment.apiUrl + 'history-records');
     });
 });

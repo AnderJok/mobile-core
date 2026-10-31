@@ -1,16 +1,19 @@
-import { computed, Injectable, signal } from "@angular/core";
+import { computed, inject, Injectable, signal } from "@angular/core";
 import { ActiveStep } from "../../shared/interfaces/active-step";
 import { Workout } from "../../shared/interfaces/workout";
+import { HistoryService } from "../../services/history.service";
+import { formatElapsed } from "../../shared/utils/duration";
 
 @Injectable({
   providedIn: 'root'
 })
 export class WorkoutPlayerService {
+    private readonly historyService = inject(HistoryService);
     readonly isPlaying = signal<boolean>(false);
     readonly activeWorkout = signal<Workout | null>(null);
     readonly error = signal('');
     readonly elapsedMs = signal(0);
-    readonly elapsedLabel = computed(() => formatElapsed(this.elapsedMs()));
+    readonly elapsedLabel = computed(() => formatElapsed(this.elapsedMs() / 1000));
     private readonly steps = signal<ActiveStep[]>([]);
     private readonly stepIndex = signal(0);
     private elapsedOffsetMs = 0;
@@ -43,12 +46,27 @@ export class WorkoutPlayerService {
     }
 
     stopWorkout() {
+        const workout = this.activeWorkout();
         this.pauseTimer();
         this.isPlaying.set(false);
         this.activeWorkout.set(null);
         this.steps.set([]);
         this.stepIndex.set(0);
         this.error.set('');
+        if (workout) {
+            this.saveHistory(workout);
+        }
+    }
+
+    private saveHistory(workout: Workout) {
+        this.historyService.createHistoryRecord({
+            workoutId: workout.id,
+            workoutName: workout.name,
+            date: toLocalIsoDateTime(new Date()),
+            durationInSeconds: Math.floor(this.elapsedMs() / 1000),
+        }).subscribe({
+            error: error => console.error('Failed to save workout history:', error),
+        });
     }
 
     togglePlayPause() {
@@ -162,9 +180,9 @@ export class WorkoutPlayerService {
     }
 }
 
-function formatElapsed(ms: number): string {
-    const totalSeconds = Math.max(0, Math.floor(ms / 1000));
-    const minutes = Math.floor(totalSeconds / 60);
-    const seconds = totalSeconds % 60;
-    return `${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
+function toLocalIsoDateTime(date: Date): string {
+    const pad = (value: number) => String(value).padStart(2, '0');
+    return `${date.getFullYear()}-${pad(date.getMonth() + 1)}-${pad(date.getDate())}`
+        + `T${pad(date.getHours())}:${pad(date.getMinutes())}:${pad(date.getSeconds())}`;
 }
+

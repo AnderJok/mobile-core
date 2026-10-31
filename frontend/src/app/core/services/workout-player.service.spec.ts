@@ -1,3 +1,5 @@
+import { provideHttpClient } from '@angular/common/http';
+import { provideHttpClientTesting } from '@angular/common/http/testing';
 import { TestBed } from '@angular/core/testing';
 import { vi } from 'vitest';
 import { ExerciseType } from '../../shared/interfaces/exercise-type';
@@ -9,6 +11,7 @@ describe('WorkoutPlayerService', () => {
     let workout: Workout;
 
     beforeEach(() => {
+        TestBed.configureTestingModule({ providers: [provideHttpClient(), provideHttpClientTesting()] });
         service = TestBed.inject(WorkoutPlayerService);
         workout = {
             id: 'workout', name: 'Circuit', description: '', tags: [],
