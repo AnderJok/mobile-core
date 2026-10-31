@@ -6,6 +6,7 @@ import com.mobile.core.backend.model.HistoryRecord;
 import com.mobile.core.backend.repository.HistoryRecordRepository;
 import com.mobile.core.backend.repository.WorkoutRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -37,10 +38,21 @@ public class HistoryRecordService {
 
     @Transactional(readOnly = true)
     public List<HistoryRecordDTO> getAllHistoryRecords() {
-        return repository.findAll()
+        return repository.findAllByOrderByDateDesc()
                 .stream()
                 .map(mapper::toDto)
-                .sorted(Comparator.comparing(HistoryRecordDTO::getDate).reversed())
+                .toList();
+    }
+
+    @Transactional(readOnly = true)
+    public List<HistoryRecordDTO> getRecentWorkouts(Integer limit) {
+        if (limit == null || limit <= 0) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Limit must be a positive integer");
+        }
+
+        return repository.findAllByOrderByDateDesc(PageRequest.of(0, limit))
+                .stream()
+                .map(mapper::toDto)
                 .toList();
     }
 }

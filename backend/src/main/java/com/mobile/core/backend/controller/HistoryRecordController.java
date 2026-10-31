@@ -26,4 +26,9 @@ public class HistoryRecordController {
     public ResponseEntity<List<HistoryRecordDTO>> getAllHistoryRecords() {
         return ResponseEntity.ok(service.getAllHistoryRecords());
     }
+
+    @GetMapping("/recent")
+    public ResponseEntity<List<HistoryRecordDTO>> getRecentWorkouts(@RequestParam Integer limit) {
+        return ResponseEntity.ok(service.getRecentWorkouts(limit));
+    }
 }

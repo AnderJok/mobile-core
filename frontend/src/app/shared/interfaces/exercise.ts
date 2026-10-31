@@ -1,5 +1,4 @@
 import { ExerciseType } from "./exercise-type";
-import { MuscleGroup } from "./muscle-group";
 
 export interface Exercise {
   id?: string;
