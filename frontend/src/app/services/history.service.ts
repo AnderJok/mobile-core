@@ -7,7 +7,6 @@ import { environment } from '../../environments/environments';
 export interface HistoryRecordInput {
     workoutId: string;
     workoutName: string;
-    // Local ISO date-time without offset, mapped to LocalDateTime on the backend
     date: string;
     durationInSeconds: number;
 }
@@ -17,7 +16,7 @@ export interface HistoryRecordInput {
 })
 export class HistoryService {
     private http = inject(HttpClient);
-    private apiUrl = environment.apiUrl;
+    private historyRecordUrl = environment.apiUrl + 'history-records';
 
     historySignal = signal<HistoryRecord[]>([]);
     readonly historyRecords = this.historySignal.asReadonly();
@@ -31,7 +30,7 @@ export class HistoryService {
     getAllHistoryRecords() {
         this.loading.set(true);
         this.loadError.set('');
-        return this.http.get<HistoryRecord[]>(this.apiUrl + 'history-records').subscribe({
+        return this.http.get<HistoryRecord[]>(this.historyRecordUrl).subscribe({
             next: historyRecords => {
                 this.historySignal.set(historyRecords);
                 this.loading.set(false);
@@ -45,6 +44,6 @@ export class HistoryService {
     }
 
     createHistoryRecord(record: HistoryRecordInput) {
-        return this.http.post<HistoryRecord>(this.apiUrl + 'history-records', record);
+        return this.http.post<HistoryRecord>(this.historyRecordUrl, record);
     }
 }

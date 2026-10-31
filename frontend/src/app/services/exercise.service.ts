@@ -11,7 +11,7 @@ import { environment } from '../../environments/environments';
 export class ExerciseService {
 
     private http = inject(HttpClient);
-    private apiUrl = environment.apiUrl;
+    private exerciseUrl = environment.apiUrl + 'exercises';
 
     private exercisesSignal = signal<Exercise[]>([]);
     readonly exercises = this.exercisesSignal.asReadonly();
@@ -23,7 +23,7 @@ export class ExerciseService {
     }
 
     createExercise(exercise: Exercise) {
-        return this.http.post<Exercise>(this.apiUrl + 'exercises', exercise).pipe(
+        return this.http.post<Exercise>(this.exerciseUrl, exercise).pipe(
             tap(savedExercise => {
                 this.exercisesSignal.update(exercises => [...exercises, savedExercise]);
             })
@@ -31,7 +31,7 @@ export class ExerciseService {
     }
 
     updateExercise(id: string, exercise: Exercise) {
-        return this.http.put<Exercise>(this.apiUrl + 'exercises/' + id, exercise).pipe(
+        return this.http.put<Exercise>(this.exerciseUrl + '/' + id, exercise).pipe(
             tap(updatedExercise => {
                 this.exercisesSignal.update(exercises =>
                     exercises.map(current => current.id === id ? updatedExercise : current)
@@ -43,7 +43,7 @@ export class ExerciseService {
     getAllExercises() {
         this.loading.set(true);
         this.loadError.set('');
-        this.http.get<Exercise[]>(this.apiUrl + 'exercises').subscribe({
+        this.http.get<Exercise[]>(this.exerciseUrl).subscribe({
             next: exercises => {
                 this.exercisesSignal.set(exercises);
                 this.loading.set(false);
@@ -57,7 +57,7 @@ export class ExerciseService {
     }
 
     deleteExerciseById(id: string) {
-        return this.http.delete(this.apiUrl + 'exercises/' + id).pipe(
+        return this.http.delete(this.exerciseUrl + '/' + id).pipe(
             tap(() => {
                 this.exercisesSignal.update(exercises => exercises.filter(exercise => exercise.id !== id));
             })
