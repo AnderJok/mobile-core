@@ -36,13 +36,13 @@ export const routes: Routes = [
         path: 'history',
         loadComponent: () => import('./features/history/pages/history/history').then((m) => m.History),
     },
-    {
-        path: 'profile',
-        loadComponent: () => import('./features/user/profile/profile').then((m) => m.Profile),
-    },
-    {
-        path: 'settings',
-        loadComponent: () => import('./features/user/settings/settings').then((m) => m.Settings),
-    },
+    // {
+    //     path: 'profile',
+    //     loadComponent: () => import('./features/user/profile/profile').then((m) => m.Profile),
+    // },
+    // {
+    //     path: 'settings',
+    //     loadComponent: () => import('./features/user/settings/settings').then((m) => m.Settings),
+    // },
     { path: '**', redirectTo: 'home' },
 ];
