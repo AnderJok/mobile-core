@@ -1,20 +1,21 @@
 nav {
     display: flex;
     align-items: center;
-    justify-content: space-between;
+    justify-content: space-evenly;
     padding: 0.5rem 1rem;
-    background-color: var(--bg-primary);
-    color: var(--cream);
+    background-color: var(--mat-sys-surface-container);
+    color: var(--mat-sys-on-surface);
 }
 
 nav a {
-    color: var(--cream);
+    color: var(--mat-sys-on-surface);
     text-decoration: none;
     padding: 1rem 0.75rem;
-    border-radius: 0 0 0.5rem 0.5rem;
+    border-radius: 0 0 var(--mat-sys-corner-small) var(--mat-sys-corner-small);
     transition: background-color 0.2s ease;
 }
 
 nav a.active {
-    background-color: var(--pumpkin-orange);
+    background-color: var(--mat-sys-primary);
+    color: var(--mat-sys-on-primary);
 }

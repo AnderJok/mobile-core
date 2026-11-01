@@ -2,6 +2,11 @@ import { Component, computed, DestroyRef, inject, signal } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { AbstractControl, FormArray, FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
+import { MatButtonModule } from '@angular/material/button';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatIconModule } from '@angular/material/icon';
+import { MatInputModule } from '@angular/material/input';
+import { MatSelectModule } from '@angular/material/select';
 import { ExerciseService } from '../../../../services/exercise.service';
 import { WorkoutService } from '../../../../services/workout.service';
 import { Workout, WorkoutInput } from '../../../../shared/interfaces/workout';
@@ -13,7 +18,15 @@ import { ExerciseType } from '../../../../shared/interfaces/exercise-type';
 
 @Component({
   selector: 'app-workout-builder',
-  imports: [ReactiveFormsModule, RouterLink],
+  imports: [
+    ReactiveFormsModule,
+    RouterLink,
+    MatFormFieldModule,
+    MatInputModule,
+    MatSelectModule,
+    MatButtonModule,
+    MatIconModule,
+  ],
   templateUrl: './workout-builder.html',
   styleUrl: './workout-builder.css',
 })

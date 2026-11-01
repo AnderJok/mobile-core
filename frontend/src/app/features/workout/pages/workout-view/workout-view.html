@@ -1,11 +1,17 @@
 <article class="workout-detail">
-    <a routerLink="/workouts">Back to workouts</a>
+    <a matButton routerLink="/workouts">
+        <mat-icon>arrow_back</mat-icon>
+        Back to workouts
+    </a>
     @if (loading()) {
         <p role="status">Loading workout...</p>
     }
     @if (error()) {
         <p role="alert">{{ error() }}</p>
-        <button type="button" class="action-btn btn-secondary" (click)="loadWorkout()">Retry</button>
+        <button matButton="outlined" type="button" (click)="loadWorkout()">
+            <mat-icon>refresh</mat-icon>
+            Retry
+        </button>
     }
     @if (workout(); as current) {
         <h1>{{ current.name }}</h1>
@@ -15,7 +21,10 @@
                 <span>{{ tag.name }}</span>
             }
         </div>
-        <a [routerLink]="['/workout-builder', current.id]" class="action-btn btn-primary">Edit workout</a>
+        <a matButton="filled" [routerLink]="['/workout-builder', current.id]">
+            <mat-icon>edit</mat-icon>
+            Edit workout
+        </a>
         @for (block of current.blocks; track block.id; let bi = $index) {
             <section class="exercise-card">
                 <h2>Block {{ bi + 1 }} &middot; {{ block.rounds }} rounds</h2>

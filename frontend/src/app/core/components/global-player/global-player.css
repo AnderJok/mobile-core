@@ -1,11 +1,97 @@
 .navbar {
-    background-color: var(--bg-primary);
-    padding: 0.5rem;
-    border-radius: 0.5rem;
+    display: flex;
+    flex-direction: column;
     gap: 0.5rem;
+    background-color: var(--mat-sys-surface-container);
+    padding: 0.5rem;
+    border-radius: var(--mat-sys-corner-small);
+}
+
+.navbar-content {
     display: grid;
+    grid-template-columns: auto minmax(0, 1fr) auto;
+    gap: 2rem;
+    justify-content: center;
     align-items: center;
-    grid-template-columns: auto auto minmax(0, 1fr) auto auto;
+}
+
+.navbar-progress {
+    display: grid;
+    grid-template-columns: auto minmax(0, 1fr) auto;
+    justify-content: center;
+    align-items: center;
+    gap: 2rem;
+}
+
+.workout-info {
+    min-width: 0;
+    cursor: pointer;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.workout-text-detail {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    gap: 0.15rem;
+}
+
+.exercise-name {
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: var(--mat-sys-on-surface);
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.next-exercise {
+    font-size: 0.9rem;
+    font-style: italic;
+    font-weight: 500;
+    color: var(--mat-sys-on-primary-container);
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.workout-time-reps {
+    justify-self: center;
+}
+
+.icon-value-exercise {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: var(--mat-sys-on-surface-variant);
+    background-color: var(--mat-sys-tertiary-container);
+    border-radius: var(--mat-sys-corner-small);
+    padding: 0.25rem 0.5rem;
+    gap: 0.15rem;
+    font-size: 1.25rem;
+}
+
+.time-rep {  
+    background-color: var(--mat-sys-on-surface-variant);
+    color: var(--mat-sys-tertiary-container);
+}
+
+.reps-exercise {
+    display: flex;
+    flex-direction: row;
+    gap: 0.25rem;
+}
+
+.reps-value {
+    display: flex;
+    flex-direction: row;
+    gap: 0.15rem;
 }
 
 .session-timer {
@@ -13,64 +99,84 @@
     font-weight: 700;
     font-variant-numeric: tabular-nums;
     letter-spacing: 0.04em;
-    color: var(--on-surface-cream);
+    color: var(--mat-sys-on-surface);
     min-width: 4.5ch;
     text-align: center;
     line-height: 1;
 }
 
-.workout-info {
-    min-width: 0;
-    cursor: pointer;
+.actions-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
 }
 
 .player-actions {
     display: flex;
     flex-wrap: nowrap;
     align-items: center;
-    gap: 0.5rem;
+    /* gap: 0.5rem; */
 }
 
-.player-actions .action-btn {
+.player-actions button {
     flex: 0 0 auto;
     white-space: nowrap;
-    padding: 0.25rem 0.75rem;
 }
 
-.player-actions .action-btn:disabled {
-    opacity: 0.4;
-    cursor: not-allowed;
+.primary-action-button {
+    background-color: var(--mat-sys-primary) !important;
+    color: var(--mat-sys-on-primary);
 }
 
-.exercise-name {
-    font-size: 1.25rem;
-    font-weight: 600;
-    color: var(--on-surface-cream);
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
+.secondary-action-button {
+    background-color: var(--mat-sys-primary) !important;
+    color: var(--mat-sys-on-primary);
+}
+
+.player-action-button {
+    border-radius: 100%;
+    transform: scale(1.4);
+    z-index: 10;
+    border: 2px solid var(--mat-sys-surface-container)
+}
+
+.prev-action-button {
+    border-top-right-radius: 0px;
+    border-bottom-right-radius: 0px;
+    border-top-left-radius: 25px;
+    border-bottom-left-radius: 25px;
+}
+
+.next-action-button {
+    border-top-right-radius: 25px;
+    border-bottom-right-radius: 25px;
+    border-top-left-radius: 0px;
+    border-bottom-left-radius: 0px;
 }
 
 .workout-name {
+    text-transform: uppercase;
+    text-align: center;
     font-size: 0.95rem;
-    font-weight: 600;
-    color: var(--text-secondary);
-}
-
-.workout-time-reps{
-    font-size: 1.5rem;
-    color: var(--on-surface-variant);
-    border: 2px solid var(--outline);
-    border-radius: 0.5rem;
-    padding: 0.25rem 0.5rem;
-    justify-self: center;
+    font-weight: 500;
+    color: var(--mat-sys-tertiary-fixed);
+    background-color: var(--mat-sys-primary-container);
+    border: 2px solid var(--mat-sys-surface-container);
+    border-bottom-left-radius: 1rem;
+    border-bottom-right-radius: 1rem;
+    width: fit-content;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 0.25rem 1rem 0.5rem 1rem;
 }
 
 .activity-icon {
     width: 3rem;
     height: 3rem;
-    border-radius: 0.5rem;
-    background-color: var(--primary-container);
+    border-radius: var(--mat-sys-corner-small);
+    background-color: var(--mat-sys-primary-container);
+    color: var(--mat-sys-on-primary-container);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -86,34 +192,55 @@
 .animate-heartbeat-bar1 {
     width: 0.25rem;
     height: 1rem;
-    background-color: var(--on-surface-cream);
-    border-radius: 999px;
+    background-color: var(--mat-sys-on-primary-container);
+    border-radius: var(--mat-sys-corner-full);
     transform-origin: center bottom;
     animation: heartbeat 1.5s ease-in-out infinite;
 }
 .animate-heartbeat-bar2 {
     width: 0.25rem;
     height: 1rem;
-    background-color: var(--on-surface-cream);
-    border-radius: 999px;
+    background-color: var(--mat-sys-on-primary-container);
+    border-radius: var(--mat-sys-corner-full);
     transform-origin: center bottom;
     animation: heartbeat 1.5s ease-in-out infinite 0.15s;
 }
 .animate-heartbeat-bar3 {
     width: 0.25rem;
     height: 1rem;
-    background-color: var(--on-surface-cream);
-    border-radius: 999px;
+    background-color: var(--mat-sys-on-primary-container);
+    border-radius: var(--mat-sys-corner-full);
     transform-origin: center bottom;
     animation: heartbeat 1.5s ease-in-out infinite 0.3s;
 }
 
 .step-type-exercise {
-    background-color: var(--on-primary-container);
+    background-color: var(--mat-sys-surface-container);
 }
 
 .step-type-rest {
-    background-color: var(--slate);
+    background-color: var(--mat-sys-primary-container);
+}
+
+.step-type-invert-exercise {
+    background-color: var(--mat-sys-primary-container);
+}
+
+.step-type-invert-rest {
+    background-color: var(--mat-sys-surface-container);
+}
+
+
+.block-round-container {
+    display: flex;
+    flex-direction: column;
+    gap: 0.1rem;
+}
+
+.timer-block-info {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
 }
 
 @keyframes heartbeat {

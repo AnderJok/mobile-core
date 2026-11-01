@@ -8,7 +8,10 @@
     }
     @if (workoutService.loadError()) {
         <p role="alert">{{ workoutService.loadError() }}</p>
-        <button type="button" class="action-btn btn-secondary" (click)="workoutService.getAllWorkouts()">Retry</button>
+        <button matButton="outlined" type="button" (click)="workoutService.getAllWorkouts()">
+            <mat-icon>refresh</mat-icon>
+            Retry
+        </button>
     }
     @if (error()) {
         <p role="alert">{{ error() }}</p>
@@ -29,19 +32,35 @@
                     </div>
                 </div>
                 <div class="workout-card-actions">
-                    <button class="action-btn btn-primary" (click)="startWorkout(workout)">Start</button>
-                    <a [routerLink]="['/workout-view', workout.id]" class="action-btn btn-secondary">View</a>
-                    <a [routerLink]="['/workout-builder', workout.id]" class="action-btn btn-secondary">Edit</a>
-                    <button type="button" class="action-btn btn-secondary" [disabled]="!!deleting()" (click)="pendingDelete.set(workout.id)">Delete</button>
+                    <button matButton="filled" type="button" (click)="startWorkout(workout)">
+                        <mat-icon>play_arrow</mat-icon>
+                        Start
+                    </button>
+                    <a matButton="outlined" [routerLink]="['/workout-view', workout.id]">
+                        <mat-icon>visibility</mat-icon>
+                        View
+                    </a>
+                    <a matButton="outlined" [routerLink]="['/workout-builder', workout.id]">
+                        <mat-icon>edit</mat-icon>
+                        Edit
+                    </a>
+                    <button matButton="outlined" type="button" [disabled]="!!deleting()" (click)="pendingDelete.set(workout.id)">
+                        <mat-icon>delete</mat-icon>
+                        Delete
+                    </button>
                 </div>
                 @if (pendingDelete() === workout.id) {
                     <div role="group" aria-label="Confirm workout deletion">
                         <p>Delete "{{ workout.name }}"?</p>
                         <div class="workout-card-actions">
-                            <button type="button" class="action-btn btn-primary" [disabled]="!!deleting()" (click)="deleteWorkout(workout)">
+                            <button matButton="filled" type="button" [disabled]="!!deleting()" (click)="deleteWorkout(workout)">
+                                <mat-icon>delete_forever</mat-icon>
                                 {{ deleting() === workout.id ? 'Deleting...' : 'Confirm delete' }}
                             </button>
-                            <button type="button" class="action-btn btn-secondary" [disabled]="!!deleting()" (click)="pendingDelete.set(null)">Cancel</button>
+                            <button matButton="outlined" type="button" [disabled]="!!deleting()" (click)="pendingDelete.set(null)">
+                                <mat-icon>close</mat-icon>
+                                Cancel
+                            </button>
                         </div>
                     </div>
                 }

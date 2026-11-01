@@ -27,7 +27,7 @@ describe('GlobalPlayer workout progression', () => {
         http.expectOne(environment.apiUrl + 'workouts').flush([workout]);
         list.detectChanges();
         const start = Array.from<HTMLButtonElement>(list.nativeElement.querySelectorAll('button'))
-            .find(button => button.textContent?.trim() === 'Start')!;
+            .find(button => button.textContent?.includes('Start'))!;
         start.click();
 
         const player = TestBed.createComponent(GlobalPlayer);
@@ -52,7 +52,7 @@ describe('GlobalPlayer workout progression', () => {
         expect(page.nativeElement.textContent).toContain('Rest between exercises');
 
         const pageNext = Array.from<HTMLButtonElement>(page.nativeElement.querySelectorAll('button'))
-            .find(button => button.textContent?.trim() === 'Next')!;
+            .find(button => button.textContent?.includes('Next'))!;
         pageNext.click();
         player.detectChanges();
         page.detectChanges();
@@ -89,7 +89,7 @@ describe('GlobalPlayer workout progression', () => {
         const player = TestBed.createComponent(GlobalPlayer);
         player.detectChanges();
         const stop = Array.from<HTMLButtonElement>(player.nativeElement.querySelectorAll('button'))
-            .find(button => button.textContent?.trim() === 'STOP')!;
+            .find(button => button.textContent?.includes('STOP'))!;
         stop.click();
         player.detectChanges();
         expect(service.currentStep()).toBeNull();
@@ -115,7 +115,7 @@ describe('GlobalPlayer workout progression', () => {
         const page = TestBed.createComponent(ActiveWorkout);
         page.detectChanges();
         const next = Array.from<HTMLButtonElement>(page.nativeElement.querySelectorAll('button'))
-            .find(button => button.textContent?.trim() === 'Next')!;
+            .find(button => button.textContent?.includes('Next'))!;
         next.click();
         expect(service.activeWorkout()).toBeNull();
         expect(service.currentStep()).toBeNull();

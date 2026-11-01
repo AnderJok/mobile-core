@@ -1,5 +1,7 @@
 import { Component, DestroyRef, inject, signal } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { MatButtonModule } from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
 import { RouterLink } from '@angular/router';
 import { WorkoutPlayerService } from '../../../../core/services/workout-player.service';
 import { Workout } from '../../../../shared/interfaces/workout';
@@ -7,7 +9,7 @@ import { WorkoutService } from '../../../../services/workout.service';
 
 @Component({
   selector: 'app-workout-list',
-  imports: [RouterLink],
+  imports: [RouterLink, MatButtonModule, MatIconModule],
   standalone: true,
   templateUrl: './workout-list.html',
   styleUrl: './workout-list.css',

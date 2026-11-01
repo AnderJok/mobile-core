@@ -11,4 +11,4 @@ h1 { font-size: 1.5rem; }
 h2 { font-size: 1.25rem; }
 ol { list-style: decimal; padding-left: 1.5rem; margin: var(--gap-md) 0; }
 .tags { display: flex; flex-wrap: wrap; gap: var(--gap-sm); }
-.tags span { background: var(--surface); padding: 0.25rem 0.75rem; border-radius: 0.5rem; }
+.tags span { background: var(--mat-sys-surface); padding: 0.25rem 0.75rem; border-radius: var(--mat-sys-corner-small); }

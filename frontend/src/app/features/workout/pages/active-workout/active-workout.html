@@ -50,15 +50,23 @@
             </div>
         </section>
 
-        <button type="button" class="btn btn-secondary" (click)="previousStep()">Previous</button>
-        <button type="button" class="btn btn-primary" (click)="nextStep()">Next</button>
+        <button matButton="tonal" type="button" (click)="previousStep()">
+            <mat-icon>skip_previous</mat-icon>
+            Previous
+        </button>
+        <button matButton="filled" type="button" class="btn-next" (click)="nextStep()">
+            <mat-icon>skip_next</mat-icon>
+            Next
+        </button>
     }
 
     <div class="actions">
-        <button type="button" class="btn btn-tertiary" (click)="workoutPlayerService.togglePlayPause()">
+        <button matButton="tonal" type="button" (click)="workoutPlayerService.togglePlayPause()">
+            <mat-icon>{{ workoutPlayerService.isPlaying() ? 'pause' : 'play_arrow' }}</mat-icon>
             {{ workoutPlayerService.isPlaying() ? 'Pause' : 'Play' }}
         </button>
-        <a href="/home" class="btn btn-danger" (click)="workoutPlayerService.stopWorkout()">
+        <a matButton="outlined" href="/home" (click)="workoutPlayerService.stopWorkout()">
+            <mat-icon>stop</mat-icon>
             Stop Workout
         </a>
     </div>

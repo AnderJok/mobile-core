@@ -1,7 +1,10 @@
 <article class="builder">
     <header>
         <h1>{{ workoutId ? 'Edit workout' : 'Create workout' }}</h1>
-        <a routerLink="/workouts">Back to workouts</a>
+        <a matButton routerLink="/workouts">
+            <mat-icon>arrow_back</mat-icon>
+            Back to workouts
+        </a>
     </header>
     @if (loading()) {
         <p role="status">Loading workout...</p>
@@ -9,40 +12,52 @@
     @if (error()) {
         <p class="error" role="alert">{{ error() }}</p>
         @if (form.disabled && !saving()) {
-            <button type="button" class="action-btn btn-secondary" (click)="loadWorkout()">Retry</button>
+            <button matButton="outlined" type="button" (click)="loadWorkout()">
+                <mat-icon>refresh</mat-icon>
+                Retry
+            </button>
         }
     }
     @if (!loading()) {
         <form [formGroup]="form" (ngSubmit)="saveWorkout()" class="form-grid">
             <fieldset [disabled]="saving() || form.disabled">
+                <mat-form-field appearance="outline">
+                    <mat-label>Name</mat-label>
+                    <mat-icon matPrefix>fitness_center</mat-icon>
+                    <input matInput id="workout-name" formControlName="name" maxlength="255" placeholder="e.g. Upper body"/>
+                    <mat-error>A name is required (maximum 255 characters).</mat-error>
+                </mat-form-field>
+                <mat-form-field appearance="outline">
+                    <mat-label>Description</mat-label>
+                    <mat-icon matPrefix>notes</mat-icon>
+                    <textarea matInput id="workout-description" formControlName="description" maxlength="255"></textarea>
+                </mat-form-field>
                 <div class="field-group">
-                    <label for="workout-name">Name</label>
-                    <input id="workout-name" formControlName="name" maxlength="255" class="input" placeholder="e.g. Upper body"/>
-                    @if (form.controls.name.touched && form.controls.name.invalid) {
-                        <p class="error">A name is required (maximum 255 characters).</p>
-                    }
-                </div>
-                <div class="field-group">
-                    <label for="workout-description">Description</label>
-                    <textarea id="workout-description" formControlName="description" maxlength="255" class="input"></textarea>
-                </div>
-                <div class="field-group">
-                    <label for="workout-tags">Tags (optional, multiple selection)</label>
-                    <select id="workout-tags" formControlName="tags" multiple [compareWith]="compareTags" class="input">
-                        @for (tag of availableTags(); track tag.id) {
-                            <option [ngValue]="tag">{{ tag.name }}</option>
-                        }
-                    </select>
-                    <label for="new-tag">New tag</label>
+                    <mat-form-field appearance="outline">
+                        <mat-label>Tags (optional, multiple selection)</mat-label>
+                        <mat-icon matPrefix>sell</mat-icon>
+                        <mat-select id="workout-tags" formControlName="tags" multiple [compareWith]="compareTags">
+                            @for (tag of availableTags(); track tag.id) {
+                                <mat-option [value]="tag">{{ tag.name }}</mat-option>
+                            }
+                        </mat-select>
+                    </mat-form-field>
                     <div class="actions">
-                        <input id="new-tag" [formControl]="newTag" maxlength="255" class="input" placeholder="e.g. Strength"/>
-                        <button type="button" class="action-btn btn-secondary" [disabled]="creatingTag() || newTag.invalid" (click)="createTag()">
+                        <mat-form-field appearance="outline" class="grow" subscriptSizing="dynamic">
+                            <mat-label>New tag</mat-label>
+                            <input matInput id="new-tag" [formControl]="newTag" maxlength="255" placeholder="e.g. Strength"/>
+                        </mat-form-field>
+                        <button matButton="tonal" type="button" [disabled]="creatingTag() || newTag.invalid" (click)="createTag()">
+                            <mat-icon>add</mat-icon>
                             {{ creatingTag() ? 'Adding...' : 'Add tag' }}
                         </button>
                     </div>
                     @if (tagsError()) {
                         <p class="error" role="alert">{{ tagsError() }}</p>
-                        <button type="button" (click)="loadTags()">Reload tags</button>
+                        <button matButton="outlined" type="button" (click)="loadTags()">
+                            <mat-icon>refresh</mat-icon>
+                            Reload tags
+                        </button>
                     }
                 </div>
                 <section formArrayName="blocks" class="blocks">
@@ -52,7 +67,10 @@
                         <p role="status">Loading exercises...</p>
                     } @else if (exerciseService.loadError()) {
                         <p class="error" role="alert">{{ exerciseService.loadError() }}</p>
-                        <button type="button" (click)="exerciseService.getAllExercises()">Reload exercises</button>
+                        <button matButton="outlined" type="button" (click)="exerciseService.getAllExercises()">
+                            <mat-icon>refresh</mat-icon>
+                            Reload exercises
+                        </button>
                     } @else if (exercises().length === 0) {
                         <p>Create an exercise first in <a routerLink="/exercises">Exercises</a>.</p>
                     }
@@ -60,23 +78,38 @@
                         <section [formGroupName]="bi" class="block exercise-card">
                             <div class="actions">
                                 <h3>Block {{ bi + 1 }}</h3>
-                                <button type="button" class="small-btn" [disabled]="$first" (click)="move(blocks, block, -1)" [attr.aria-label]="'Move block ' + (bi + 1) + ' up'">Up</button>
-                                <button type="button" class="small-btn" [disabled]="$last" (click)="move(blocks, block, 1)" [attr.aria-label]="'Move block ' + (bi + 1) + ' down'">Down</button>
-                                <button type="button" class="small-btn" [disabled]="blocks.length === 1" (click)="blocks.removeAt(bi)">Remove block</button>
+                                <button matIconButton type="button" [disabled]="$first" (click)="move(blocks, block, -1)" [attr.aria-label]="'Move block ' + (bi + 1) + ' up'">
+                                    <mat-icon>arrow_upward</mat-icon>
+                                </button>
+                                <button matIconButton type="button" [disabled]="$last" (click)="move(blocks, block, 1)" [attr.aria-label]="'Move block ' + (bi + 1) + ' down'">
+                                    <mat-icon>arrow_downward</mat-icon>
+                                </button>
+                                <button matButton type="button" [disabled]="blocks.length === 1" (click)="blocks.removeAt(bi)">
+                                    <mat-icon>delete</mat-icon>
+                                    Remove block
+                                </button>
                             </div>
                             <div class="numbers">
-                                <label>Rounds
-                                    <input type="number" formControlName="rounds" min="1" step="1" class="input"/>
-                                </label>
-                                <label>Rest between exercises (s)
-                                    <input type="number" formControlName="restBetweenExercises" min="0" step="1" class="input"/>
-                                </label>
-                                <label>Rest between rounds (s)
-                                    <input type="number" formControlName="restBetweenRounds" min="0" step="1" class="input"/>
-                                </label>
-                                <label>Rest after block (s)
-                                    <input type="number" formControlName="restAfterBlock" min="0" step="1" class="input"/>
-                                </label>
+                                <mat-form-field appearance="outline">
+                                    <mat-label>Rounds</mat-label>
+                                    <mat-icon matPrefix>repeat</mat-icon>
+                                    <input matInput type="number" formControlName="rounds" min="1" step="1"/>
+                                </mat-form-field>
+                                <mat-form-field appearance="outline">
+                                    <mat-label>Rest between exercises (s)</mat-label>
+                                    <mat-icon matPrefix>timer</mat-icon>
+                                    <input matInput type="number" formControlName="restBetweenExercises" min="0" step="1"/>
+                                </mat-form-field>
+                                <mat-form-field appearance="outline">
+                                    <mat-label>Rest between rounds (s)</mat-label>
+                                    <mat-icon matPrefix>timer</mat-icon>
+                                    <input matInput type="number" formControlName="restBetweenRounds" min="0" step="1"/>
+                                </mat-form-field>
+                                <mat-form-field appearance="outline">
+                                    <mat-label>Rest after block (s)</mat-label>
+                                    <mat-icon matPrefix>hourglass_bottom</mat-icon>
+                                    <input matInput type="number" formControlName="restAfterBlock" min="0" step="1"/>
+                                </mat-form-field>
                             </div>
                             @if ($last) {
                                 <p class="hint">Rest after block is saved but does not apply while this is the last block.</p>
@@ -85,25 +118,37 @@
                                 @for (instance of block.controls.exercises.controls; track instance; let ei = $index) {
                                     <div [formGroupName]="ei" class="instance">
                                         <div class="numbers">
-                                            <label>Exercise {{ ei + 1 }}
-                                                <select formControlName="exerciseId" class="input" (change)="selectExercise(bi, ei)">
-                                                    <option value="">Select an exercise</option>
+                                            <mat-form-field appearance="outline">
+                                                <mat-label>Exercise {{ ei + 1 }}</mat-label>
+                                                <mat-icon matPrefix>fitness_center</mat-icon>
+                                                <mat-select formControlName="exerciseId" placeholder="Select an exercise" (selectionChange)="selectExercise(bi, ei)">
                                                     @for (exercise of exercises(); track exercise.id) {
-                                                        <option [value]="exercise.id">{{ exercise.name }} ({{ exercise.type }})</option>
+                                                        <mat-option [value]="exercise.id">{{ exercise.name }} ({{ exercise.type }})</mat-option>
                                                     }
-                                                </select>
-                                            </label>
-                                            <label>Target ({{ unit(instance.controls.exerciseId.value) }})
-                                                <input type="number" formControlName="targetValue" min="1" step="1" class="input"/>
-                                            </label>
-                                            <label>Weight (kg, optional)
-                                                <input type="number" formControlName="weight" min="0" step="any" class="input"/>
-                                            </label>
+                                                </mat-select>
+                                            </mat-form-field>
+                                            <mat-form-field appearance="outline">
+                                                <mat-label>Target ({{ unit(instance.controls.exerciseId.value) }})</mat-label>
+                                                <mat-icon matPrefix>{{ unit(instance.controls.exerciseId.value) === 'seconds' ? 'timer' : 'tag' }}</mat-icon>
+                                                <input matInput type="number" formControlName="targetValue" min="1" step="1"/>
+                                            </mat-form-field>
+                                            <mat-form-field appearance="outline">
+                                                <mat-label>Weight (kg, optional)</mat-label>
+                                                <mat-icon matPrefix>scale</mat-icon>
+                                                <input matInput type="number" formControlName="weight" min="0" step="any"/>
+                                            </mat-form-field>
                                         </div>
                                         <div class="actions">
-                                            <button type="button" class="small-btn" [disabled]="$first" (click)="move(block.controls.exercises, instance, -1)" [attr.aria-label]="'Move exercise ' + (ei + 1) + ' up in block ' + (bi + 1)">Up</button>
-                                            <button type="button" class="small-btn" [disabled]="$last" (click)="move(block.controls.exercises, instance, 1)" [attr.aria-label]="'Move exercise ' + (ei + 1) + ' down in block ' + (bi + 1)">Down</button>
-                                            <button type="button" class="small-btn" [disabled]="block.controls.exercises.length === 1" (click)="block.controls.exercises.removeAt(ei)">Remove exercise</button>
+                                            <button matIconButton type="button" [disabled]="$first" (click)="move(block.controls.exercises, instance, -1)" [attr.aria-label]="'Move exercise ' + (ei + 1) + ' up in block ' + (bi + 1)">
+                                                <mat-icon>arrow_upward</mat-icon>
+                                            </button>
+                                            <button matIconButton type="button" [disabled]="$last" (click)="move(block.controls.exercises, instance, 1)" [attr.aria-label]="'Move exercise ' + (ei + 1) + ' down in block ' + (bi + 1)">
+                                                <mat-icon>arrow_downward</mat-icon>
+                                            </button>
+                                            <button matButton type="button" [disabled]="block.controls.exercises.length === 1" (click)="block.controls.exercises.removeAt(ei)">
+                                                <mat-icon>delete</mat-icon>
+                                                Remove exercise
+                                            </button>
                                         </div>
                                         @if (instance.touched && instance.invalid) {
                                             <p class="error">Select an exercise, enter a positive whole-number target and a non-negative weight.</p>
@@ -111,19 +156,29 @@
                                     </div>
                                 }
                             </div>
-                            <button type="button" class="action-btn btn-secondary" (click)="addExercise(bi)">Add exercise</button>
+                            <button matButton="tonal" type="button" (click)="addExercise(bi)">
+                                <mat-icon>add</mat-icon>
+                                Add exercise
+                            </button>
                             @if (block.touched && block.invalid) {
                                 <p class="error">Check the exercises and numeric values. Rounds must be positive; rests must be non-negative whole numbers.</p>
                             }
                         </section>
                     }
-                    <button type="button" class="action-btn btn-secondary" (click)="addBlock()">Add block</button>
+                    <button matButton="tonal" type="button" (click)="addBlock()">
+                        <mat-icon>library_add</mat-icon>
+                        Add block
+                    </button>
                 </section>
                 <div class="actions">
-                    <button type="submit" class="action-btn btn-primary" [disabled]="saving() || creatingTag()">
+                    <button matButton="filled" type="submit" [disabled]="saving() || creatingTag()">
+                        <mat-icon>save</mat-icon>
                         {{ saving() ? 'Saving...' : workoutId ? 'Save changes' : 'Create workout' }}
                     </button>
-                    <a routerLink="/workouts" class="action-btn btn-secondary">Cancel</a>
+                    <a matButton="outlined" routerLink="/workouts">
+                        <mat-icon>close</mat-icon>
+                        Cancel
+                    </a>
                 </div>
             </fieldset>
         </form>

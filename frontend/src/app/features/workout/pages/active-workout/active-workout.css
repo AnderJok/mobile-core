@@ -18,43 +18,43 @@ h2 { font-size: 1.25rem; margin: 0; }
 }
 
 .workout-name {
-    color: var(--on-surface-variant);
+    color: var(--mat-sys-on-surface-variant);
     margin: var(--gap-sm) 0 0;
 }
 
 .status {
     padding: 0.25rem 0.75rem;
-    border-radius: 9999px;
-    background: var(--surface-container-high);
-    color: var(--on-surface-variant);
+    border-radius: var(--mat-sys-corner-full);
+    background: var(--mat-sys-surface-container-high);
+    color: var(--mat-sys-on-surface-variant);
     font-size: 0.875rem;
     white-space: nowrap;
 }
 
 .status-playing {
-    background: var(--primary-container);
-    color: var(--on-primary-container);
+    background: var(--mat-sys-primary-container);
+    color: var(--mat-sys-on-primary-container);
 }
 
 .card {
-    background-color: var(--bg-primary);
-    border: 1px solid rgba(255, 255, 255, 0.05);
-    border-radius: 0.75rem;
+    background-color: var(--mat-sys-surface-container);
+    border: 1px solid var(--mat-sys-outline-variant);
+    border-radius: var(--mat-sys-corner-medium);
     padding: var(--gap-lg);
-    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+    box-shadow: var(--mat-sys-level2);
     display: flex;
     flex-direction: column;
     gap: var(--gap-md);
 }
 
 .eyebrow {
-    color: var(--on-surface-variant);
+    color: var(--mat-sys-on-surface-variant);
     font-size: 0.875rem;
     margin: 0;
 }
 
 .description {
-    color: var(--on-surface-variant);
+    color: var(--mat-sys-on-surface-variant);
     margin: 0;
 }
 
@@ -68,14 +68,14 @@ h2 { font-size: 1.25rem; margin: 0; }
     display: flex;
     flex-direction: column;
     gap: 0.25rem;
-    background: var(--surface);
+    background: var(--mat-sys-surface);
     padding: var(--gap-sm) var(--gap-md);
-    border-radius: 0.5rem;
+    border-radius: var(--mat-sys-corner-small);
     min-width: 7rem;
 }
 
 .stat-label {
-    color: var(--on-surface-variant);
+    color: var(--mat-sys-on-surface-variant);
     font-size: 0.75rem;
     text-transform: uppercase;
     letter-spacing: 0.05em;
@@ -92,7 +92,7 @@ h2 { font-size: 1.25rem; margin: 0; }
     align-items: baseline;
     gap: var(--gap-md);
     padding: var(--gap-sm) 0;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    border-bottom: 1px solid var(--mat-sys-outline-variant);
 }
 
 .progress-row:last-child {
@@ -105,40 +105,14 @@ h2 { font-size: 1.25rem; margin: 0; }
     gap: var(--gap-md);
 }
 
-.btn {
+.active-workout button,
+.active-workout .actions a {
     min-height: var(--touch-target-min);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border: none;
-    border-radius: 0.75rem;
-    font-weight: 600;
-    font-size: 1rem;
-    cursor: pointer;
-    text-decoration: none;
-    transition: transform 0.1s;
 }
 
-.btn:active {
-    transform: scale(0.97);
-}
-
-.btn-primary {
+.btn-next {
     width: 100%;
     height: 56px;
-    background-color: var(--primary-container);
-    color: var(--on-primary-container);
-}
-
-.btn-secondary {
-    background: var(--surface-container-high);
-    color: var(--on-surface);
-}
-
-.btn-danger {
-    background: transparent;
-    color: var(--on-surface);
-    border: 1px solid var(--outline-variant);
 }
 
 .timer-container {
@@ -146,7 +120,7 @@ h2 { font-size: 1.25rem; margin: 0; }
     justify-content: center;
     align-items: center;
     border-radius: 50%;
-    border: 3px solid var(--pumpkin-orange);
+    border: 3px solid var(--mat-sys-primary);
     font-size: 2rem;
     font-weight: 700;
     font-variant-numeric: tabular-nums;

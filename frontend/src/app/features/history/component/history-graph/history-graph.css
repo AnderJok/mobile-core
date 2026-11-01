@@ -1,0 +1,7 @@
+rect {
+    fill: var(--mat-sys-tertiary);
+}
+
+rect.highlight {
+    fill: var(--mat-sys-primary);
+}

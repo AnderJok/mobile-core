@@ -1,12 +1,14 @@
 import { Component, DestroyRef, inject, signal } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { ActivatedRoute, RouterLink } from '@angular/router';
+import { MatButtonModule } from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
 import { WorkoutService } from '../../../../services/workout.service';
 import { Workout } from '../../../../shared/interfaces/workout';
 
 @Component({
   selector: 'app-workout-view',
-  imports: [RouterLink],
+  imports: [RouterLink, MatButtonModule, MatIconModule],
   templateUrl: './workout-view.html',
   styleUrl: './workout-view.css',
 })

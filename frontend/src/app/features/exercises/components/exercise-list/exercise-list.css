@@ -11,9 +11,9 @@
     align-items: center;
     justify-content: space-between;
     padding: 1rem;
-    border-radius: 0.75rem;
+    border-radius: var(--mat-sys-corner-medium);
 }
-.list-item.featured { border-left: 4px solid var(--primary-container); }
+.list-item.featured { border-left: 4px solid var(--mat-sys-primary); }
 
 
 .item-info {
@@ -24,10 +24,10 @@
 }
 
 .item-name {
-    font-family: var(--font-headline);
+    font-family: var(--mat-sys-headline-small-font);
     font-size: 20px;
     font-weight: 600;
-    color: #fff;
+    color: var(--mat-sys-on-surface);
 }
 
 .item-meta {
@@ -37,23 +37,23 @@
 
 .badge {
     align-self: center;
-    background-color: var(--surface);
+    background-color: var(--mat-sys-surface);
     padding: 0.125rem 0.5rem;
-    border-radius: 0.25rem;
+    border-radius: var(--mat-sys-corner-extra-small);
     font-size: 10px;
     font-weight: 700;
-    color: var(--primary);
+    color: var(--mat-sys-primary);
     letter-spacing: 0.05em;
     text-transform: uppercase;
 }
 
 .variations {
-    background-color: var(--slate);
-    color: var(--surface);
+    background-color: var(--mat-sys-tertiary-container);
+    color: var(--mat-sys-on-tertiary-container);
 }
 
 .tags {
-    color: var(--on-surface-variant);
+    color: var(--mat-sys-on-surface-variant);
     font-size: 12px;
     font-weight: 500;
 }
@@ -66,7 +66,7 @@
 
 .no-exercises {
     text-align: center;
-    color: var(--on-surface-variant);
+    color: var(--mat-sys-on-surface-variant);
     font-size: 14px;
     font-weight: 500;
 }

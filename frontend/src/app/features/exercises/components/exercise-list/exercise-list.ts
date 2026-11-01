@@ -1,11 +1,13 @@
 import { Component, DestroyRef, EventEmitter, inject, Output, signal } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { MatButtonModule } from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
 import { ExerciseService } from '../../../../services/exercise.service';
 import type { Exercise } from '../../../../shared/interfaces/exercise';
 
 @Component({
   selector: 'app-exercise-list',
-  imports: [],
+  imports: [MatButtonModule, MatIconModule],
   templateUrl: './exercise-list.html',
   styleUrl: './exercise-list.css',
 })

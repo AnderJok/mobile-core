@@ -1,7 +1,7 @@
-<div class="search-bar">
-    <!-- <span class="material-symbols-outlined icon-secondary" style="margin-left: 0.5rem">search</span> -->
-    <input class="search-input" placeholder="Search routines..." type="text"/>
-    <button class="filter-btn">
-        <span class="material-symbols-outlined">filter_icon</span>
+<mat-form-field appearance="outline" class="search-field" subscriptSizing="dynamic">
+    <mat-icon matPrefix>search</mat-icon>
+    <input matInput placeholder="Search routines..." type="text" aria-label="Search routines"/>
+    <button matIconButton matSuffix type="button" aria-label="Filter routines">
+        <mat-icon>filter_list</mat-icon>
     </button>
-</div>
+</mat-form-field>

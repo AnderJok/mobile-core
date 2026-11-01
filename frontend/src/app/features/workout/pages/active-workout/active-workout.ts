@@ -1,10 +1,12 @@
 import { Component, inject } from '@angular/core';
 import { Router } from '@angular/router';
+import { MatButtonModule } from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
 import { WorkoutPlayerService } from '../../../../core/services/workout-player.service';
 
 @Component({
   selector: 'app-active-workout',
-  imports: [],
+  imports: [MatButtonModule, MatIconModule],
   templateUrl: './active-workout.html',
   styleUrl: './active-workout.css',
 })

@@ -1,43 +1,55 @@
 <!-- <h2 class="section-title">Manage Exercises</h2> -->
 <div class="exercise-card">
     <form [formGroup]="exerciseForm" (ngSubmit)="saveExercise()" class="form-grid">
-         <div class="field-group">
-            <label class="label">Name</label>
-            <input formControlName="name" class="input" placeholder="e.g. Weighted Pull up" type="text"/>
+        <mat-form-field appearance="outline">
+            <mat-label>Name</mat-label>
+            <input matInput formControlName="name" placeholder="e.g. Weighted Pull up" type="text"/>
+            <mat-icon matPrefix>fitness_center</mat-icon>
+            @if (exerciseForm.controls.name.hasError('required')) {
+                <mat-error>Name is required</mat-error>
+            }
+        </mat-form-field>
+        <mat-form-field appearance="outline">
+            <mat-label>Type</mat-label>
+            <mat-select formControlName="type">
+                <mat-option [value]="ExerciseType.REPS">Reps</mat-option>
+                <mat-option [value]="ExerciseType.TIME">Time</mat-option>
+            </mat-select>
+            <mat-icon matPrefix>{{ exerciseForm.controls.type.value === ExerciseType.TIME ? 'timer' : 'repeat' }}</mat-icon>
+        </mat-form-field>
+        <mat-form-field appearance="outline">
+            <mat-label>Default value</mat-label>
+            <input matInput formControlName="defaultValue" placeholder="e.g. 10 or 30" type="number"/>
+            <mat-icon matPrefix>tag</mat-icon>
+        </mat-form-field>
+        <div class="checkbox-field">
+            <mat-checkbox formControlName="hasVariations">Has variations (L/R)</mat-checkbox>
         </div>
-        <div class="field-group">
-            <label class="label">Has variations</label>
-            <input formControlName="hasVariations" class="input" type="checkbox"/>
-        </div>
-        <div class="field-group">
-            <label class="label">Type</label>
-            <select formControlName="type" class="input">
-                <option [value]="ExerciseType.REPS">Reps</option>
-                <option [value]="ExerciseType.TIME">Time</option>
-            </select>
-        </div>
-        <div class="field-group">
-            <label class="label">Default value</label>
-            <input formControlName="defaultValue" class="input" placeholder="e.g. 10 or 30" type="number"/>
-        </div>
-        <div class="field-group col-span-2">
-            <label class="label">Description</label>
-            <textarea formControlName="description" class="input" placeholder="Describe the exercise"></textarea>
-        </div>
-        <div class="field-group col-span-2">
+        <mat-form-field appearance="outline" class="col-span-2">
+            <mat-label>Description</mat-label>
+            <textarea matInput formControlName="description" placeholder="Describe the exercise"></textarea>
+            <mat-icon matPrefix>notes</mat-icon>
+        </mat-form-field>
+        <div class="col-span-2">
             <p>Does it make sense to have tags or muscle groups for an exercise?</p>
-            <label class="label">Tags</label>
-            <input formControlName="tags" class="input" placeholder="Strength, Finger, Grip" type="text"/>
+            <mat-form-field appearance="outline" class="full-width">
+                <mat-label>Tags</mat-label>
+                <input matInput formControlName="tags" placeholder="Strength, Finger, Grip" type="text"/>
+                <mat-icon matPrefix>sell</mat-icon>
+                <mat-hint>Comma separated</mat-hint>
+            </mat-form-field>
             <!-- plus icon to add automatically tags -->
         </div>
-        <div class="col-span-2">
-            <button class="save-btn" type="submit">
-                <span class="material-symbols-outlined">
+        <div class="col-span-2 form-actions">
+            <button matButton="filled" class="save-btn" type="submit">
+                <mat-icon>{{ selectedExercise ? 'save' : 'add' }}</mat-icon>
                 {{ selectedExercise ? 'Save changes' : 'Create exercise' }}
-                </span>
             </button>
             @if (selectedExercise) {
-                <button class="cancel-btn" type="button" (click)="cancelEditing()">Cancel</button>
+                <button matButton="outlined" type="button" (click)="cancelEditing()">
+                    <mat-icon>close</mat-icon>
+                    Cancel
+                </button>
             }
         </div>
     </form>

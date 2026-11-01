@@ -1,36 +1,6 @@
-/* You can add global styles to this file, and also import other style files */
-
 @import 'tailwindcss';
 
 :root {
-    --pumpkin-orange: #ff8a00;
-    --dark-slate: #373a3e;
-    --slate: #708090;
-    --cream: #fff2df;
-
-    --text-primary: #ffffff;
-    --text-secondary: #b3b3b3;
-
-    --bg-body: #1e1e1e;
-    --bg-primary: var(--dark-slate);
-    --bg-secondary: var(--cream);
-
-    --surface: #1b110a;
-    --surface-container: #281d15;
-    --surface-container-low: #241912;
-    --surface-container-high: #33281f;
-    --surface-container-highest: #3f3229;
-    --surface-bright: #43372e;
-    --on-surface: var(--text-primary);
-    --on-surface-variant: var(--text-secondary);
-    --on-surface-cream: var(--cream);
-    
-    --primary: var(--pumpkin-orange);
-    --primary-container: var(--pumpkin-orange);
-    --on-primary-container: #613100;
-
-    --outline: #a58c7b;
-    --outline-variant: #564334;
     /* Spacing */
     --gap-sm: 0.5rem;
     --gap-md: 1rem;
@@ -41,73 +11,23 @@
 }
 
 body {
-    background-color: var(--bg-body);
-    color: var(--bg-secondary);
+    margin: 0;
+    height: 100%;
+    background-color: var(--mat-sys-background);
+    color: var(--mat-sys-on-background);
+    font: var(--mat-sys-body-medium);
 }
 
 .exercise-card {
-    background-color: var(--bg-primary);
-    border: 1px solid rgba(255, 255, 255, 0.05);
-    border-radius: 0.75rem;
+    background-color: var(--mat-sys-surface-container);
+    border: 1px solid var(--mat-sys-outline-variant);
+    border-radius: var(--mat-sys-corner-medium);
     padding: 1.5rem;
-    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+    box-shadow: var(--mat-sys-level2);
     transition: transform 0.2s ease-out;
 }
 
-
-.filter-btn {
-    position: absolute;
-    right: 1rem;
-    top: 50%;
-    transform: translateY(-50%);
-    background: none;
-    border: none;
-    color: var(--primary);
-    padding: 0.5rem;
-    border-radius: 9999px;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    transition: background-color 0.2s;
-}
-.filter-btn:hover { background-color: rgba(255, 183, 127, 0.1); }
-
-
-.action-btn {
-    flex: 1;
-    height: 48px;
-    border-radius: var(--radius-xl);
-    font-family: var(--font-display);
-    font-weight: 600;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 0.5rem;
-    cursor: pointer;
-    transition: transform 0.1s, background-color 0.2s;
-    border: none;
-    padding: 0.25rem;
-}
-.action-btn.edit:hover { color: var(--primary); }
-.action-btn.delete:hover { color: var(--error); }
-
-.btn-primary {
-    background-color: var(--primary-container);
-    color: #000;
-}
-
-.btn-secondary {
-    background: transparent;
-    border: 2px solid rgba(255, 255, 255, 0.7);
-    color: #fff;
-}
-
-.btn-tertiary {
-    background: var(--slate);
-    border: 2px solid rgba(255, 255, 255, 0.7);
-    color: #fff;
-}
-
-.btn-primary:active {
-    transform: scale(0.95);
+.mat-bg-primary {
+    background-color: var(--mat-sys-primary);
+    color: var(--mat-sys-on-primary);
 }

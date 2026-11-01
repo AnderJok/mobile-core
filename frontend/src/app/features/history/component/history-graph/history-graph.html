@@ -1,13 +1,17 @@
 <h1>History Graph</h1>
 <div>
     <b>Selectable in the future...</b>
-    <select>
-        <option value="workout">Week</option>
-        <option value="exercise">Month</option>
-    </select>
+    <mat-form-field appearance="outline">
+        <mat-label>Period</mat-label>
+        <mat-icon matPrefix>date_range</mat-icon>
+        <mat-select value="workout">
+            <mat-option value="workout">Week</mat-option>
+            <mat-option value="exercise">Month</mat-option>
+        </mat-select>
+    </mat-form-field>
 </div>
 <svg>
-    <rect x="10" y="10" width="10" height="40" fill="gray" />
-    <rect x="120" y="10" width="10" height="80" fill="lightgray" />
-    <rect x="230" y="10" width="10" height="70" fill="gray" />
+    <rect x="10" y="10" width="10" height="40" />
+    <rect class="highlight" x="120" y="10" width="10" height="80" />
+    <rect x="230" y="10" width="10" height="70" />
 </svg>

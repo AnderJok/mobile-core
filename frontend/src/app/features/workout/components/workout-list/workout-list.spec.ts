@@ -36,7 +36,7 @@ describe('WorkoutList', () => {
 
     it('requires confirmation, deletes and removes the card after success', () => {
         const deleteButton = Array.from<HTMLButtonElement>(fixture.nativeElement.querySelectorAll('button'))
-            .find(button => button.textContent?.trim() === 'Delete')!;
+            .find(button => button.textContent?.includes('Delete'))!;
         deleteButton.click();
         fixture.detectChanges();
         http.expectNone(url + '/' + workout.id);

@@ -19,9 +19,9 @@ header {
 h1 { font-size: 1.5rem; }
 h2 { font-size: 1.25rem; }
 h3 { font-size: 1.1rem; margin-right: auto; }
-a { color: var(--primary); }
+a:not([matButton]) { color: var(--mat-sys-primary); }
 
-fieldset, .blocks, .block, .instances, .field-group, label {
+fieldset, .blocks, .block, .instances, .field-group {
     display: flex;
     flex-direction: column;
     gap: var(--gap-sm);
@@ -31,23 +31,10 @@ fieldset, .blocks, .block, .instances, .field-group, label {
 fieldset { border: 0; padding: 0; gap: var(--gap-lg); }
 .block { gap: var(--gap-md); }
 
-.input {
-    background: var(--surface);
-    border: 1px solid var(--outline-variant);
-    border-radius: 0.5rem;
-    padding: 0.75rem;
-    color: var(--on-surface);
-    width: 100%;
-    min-width: 0;
-}
-
-.input:focus { outline: 2px solid var(--primary); }
+mat-form-field { width: 100%; min-width: 0; }
+.actions .grow { flex: 1; width: auto; min-width: 12rem; }
 textarea { min-height: 5rem; }
-select[multiple] { min-height: 6rem; }
-.numbers { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: var(--gap-md); }
-.instance { padding: 1rem 0; border-bottom: 1px solid var(--outline-variant); }
-.instance .actions { margin-top: var(--gap-sm); }
-.small-btn { border: 1px solid var(--outline); border-radius: 0.5rem; padding: 0.5rem 0.75rem; cursor: pointer; }
-button:disabled { opacity: 0.45; cursor: not-allowed; }
-.error { color: #ffb4ab; }
-.hint { color: var(--on-surface-variant); font-size: 0.875rem; }
+.numbers { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 0 var(--gap-md); }
+.instance { padding: 1rem 0; border-bottom: 1px solid var(--mat-sys-outline-variant); }
+.error { color: var(--mat-sys-error); }
+.hint { color: var(--mat-sys-on-surface-variant); font-size: 0.875rem; }

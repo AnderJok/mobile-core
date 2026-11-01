@@ -3,10 +3,24 @@ import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ExerciseService } from '../../../../services/exercise.service';
 import { Exercise } from '../../../../shared/interfaces/exercise';
 import { ExerciseType } from '../../../../shared/interfaces/exercise-type';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { MatSelectModule } from '@angular/material/select';
+import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatButtonModule } from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
 
 @Component({
   selector: 'app-exercise-builder',
-  imports: [ReactiveFormsModule],
+  imports: [
+    ReactiveFormsModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatSelectModule,
+    MatCheckboxModule,
+    MatButtonModule,
+    MatIconModule,
+  ],
   templateUrl: './exercise-builder.html',
   styleUrl: './exercise-builder.css',
 })

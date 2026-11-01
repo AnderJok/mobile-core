@@ -1,10 +1,13 @@
 import { Component, inject } from '@angular/core';
 import { Router } from '@angular/router';
+import { MatButtonModule } from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
 import { WorkoutPlayerService } from '../../services/workout-player.service';
+import { MatProgressBarModule } from '@angular/material/progress-bar';
 
 @Component({
   selector: 'app-global-player',
-  imports: [],
+  imports: [MatButtonModule, MatIconModule, MatProgressBarModule],
   templateUrl: './global-player.html',
   styleUrl: './global-player.css',
 })

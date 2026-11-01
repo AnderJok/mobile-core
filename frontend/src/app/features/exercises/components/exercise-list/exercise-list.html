@@ -16,21 +16,27 @@
                 }
             </div>
             <div class="item-actions">
-                <button class="action-btn btn-primary" (click)="editExercise(exercise)" [disabled]="!!deleting()">
-                    <span class="material-symbols-outlined">Edit</span>
+                <button matButton="filled" type="button" (click)="editExercise(exercise)" [disabled]="!!deleting()">
+                    <mat-icon>edit</mat-icon>
+                    Edit
                 </button>
-                <button type="button" class="action-btn btn-secondary" [disabled]="!!deleting()" (click)="pendingDelete.set(exercise.id ?? null)">
-                    <span class="material-symbols-outlined">Delete</span>
+                <button matButton="outlined" type="button" [disabled]="!!deleting()" (click)="pendingDelete.set(exercise.id ?? null)">
+                    <mat-icon>delete</mat-icon>
+                    Delete
                 </button>
             </div>
             @if (pendingDelete() === exercise.id) {
                 <div role="group" aria-label="Confirm exercise deletion">
                     <p>Delete "{{ exercise.name }}"?</p>
                     <div class="item-actions">
-                        <button type="button" class="action-btn btn-primary" [disabled]="!!deleting()" (click)="deleteExercise(exercise)">
+                        <button matButton="filled" type="button" [disabled]="!!deleting()" (click)="deleteExercise(exercise)">
+                            <mat-icon>delete_forever</mat-icon>
                             {{ deleting() === exercise.id ? 'Deleting...' : 'Confirm delete' }}
                         </button>
-                        <button type="button" class="action-btn btn-secondary" [disabled]="!!deleting()" (click)="pendingDelete.set(null)">Cancel</button>
+                        <button matButton="outlined" type="button" [disabled]="!!deleting()" (click)="pendingDelete.set(null)">
+                            <mat-icon>close</mat-icon>
+                            Cancel
+                        </button>
                     </div>
                 </div>
             }

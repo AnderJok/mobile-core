@@ -3,59 +3,84 @@
 }
 @if(workoutPlayerService.activeWorkout(); as activeWorkout) {
     @if (workoutPlayerService.currentStep(); as step) {
-    <div class="navbar" [class]="'step-type-' + step.type.toLowerCase()">
-        <span class="activity-icon">
-            @if(workoutPlayerService.isPlaying()) {
-                <span class="heartbeat-bars">
-                    <div class="animate-heartbeat-bar1"></div>
-                    <div class="animate-heartbeat-bar2"></div>
-                    <div class="animate-heartbeat-bar3"></div>
+        <div class="navbar" [class]="'step-type-' + step.type.toLowerCase()">
+            <div class="navbar-content">
+                <span class="activity-icon" [class]="'step-type-invert-' + step.type.toLowerCase()">
+                    @if(workoutPlayerService.isPlaying()) {
+                        <span class="heartbeat-bars">
+                            <div class="animate-heartbeat-bar1"></div>
+                            <div class="animate-heartbeat-bar2"></div>
+                            <div class="animate-heartbeat-bar3"></div>
+                        </span>
+                    } @else {
+                        <mat-icon aria-label="Paused">pause</mat-icon>
+                    }
                 </span>
-            } @else {
-                <span class="activity-icon"><b>II</b></span>
-            }
-        </span>
-        <span class="session-timer" aria-live="polite" aria-label="Workout time">
-            {{ workoutPlayerService.elapsedLabel() }}
-        </span>
-        <span class="workout-info" (click)="goToWorkout()">
-            <div class="exercise-name">
-                <h1 class="exercise-name">
-                    {{ step.name }}{{ step.side === 'NONE' ? '' : ' (' + step.side + ')' }}
-                </h1>
+                <span class="workout-info" (click)="goToWorkout()">
+                    <span class="workout-text-detail">
+                        <h1 class="exercise-name">
+                            {{ step.name }}{{ step.side === 'NONE' ? '' : ' (' + step.side + ')' }}
+                        </h1>
+                        @if (workoutPlayerService.upcomingStep(); as next) {
+                            <span class="next-exercise"><mat-icon>navigate_next</mat-icon> {{ next.name }}{{ next.side === 'NONE' ? '' : ' (' + next.side + ')' }}</span>
+                        } @else {
+                            <span class="next-exercise"><mat-icon>navigate_next</mat-icon> Last step</span>
+                        }
+                    </span>
+                    <span class="workout-time-reps">
+                        @if (step.valueType === 'TIME') {
+                            <div class="icon-value-exercise time-rep">
+                                <mat-icon>timer</mat-icon>
+                                <p><b>{{ step.targetValue }}</b></p>
+                                <p>s</p>
+                            </div>
+                        } @else {
+                            <div class="reps-exercise">
+                                <div class="icon-value-exercise">
+                                    <mat-icon>tag</mat-icon>
+                                        <div class="reps-value">
+                                            <p><b>{{ step.targetValue }}</b></p>
+                                            <p>reps</p>
+                                        </div>
+                                </div>
+                                @if (step.weight) {
+                                    <div class="icon-value-exercise">
+                                        <mat-icon>fitness_center</mat-icon>
+                                        <div class="reps-value">
+                                            <p><b>{{ step.weight }}</b></p>
+                                            <p>{{ step.weight ? 'Kg' : '' }}</p>
+                                        </div>
+                                    </div>
+                                }
+                            </div>
+                        }
+                    </span>
+                </span>
+                <span class="actions-container">
+                    <span class="player-actions">
+                        <button matMiniFab class="prev-action-button" [class]="'step-type-invert-' + step.type.toLowerCase()" type="button" [disabled]="workoutPlayerService.stepNumber() <= 1" (click)="previousStep()">
+                            <mat-icon>skip_previous</mat-icon>
+                        </button>
+                        <button matMiniFab class="player-action-button primary-action-button " type="button" (click)="workoutPlayerService.togglePlayPause()">
+                            <mat-icon>{{ workoutPlayerService.isPlaying() ? 'pause' : 'play_arrow' }}</mat-icon>
+                        </button>
+                        <button matMiniFab class="next-action-button" [class]="'step-type-invert-' + step.type.toLowerCase()" type="button" (click)="nextStep()">
+                            <mat-icon>skip_next</mat-icon>
+                        </button>
+                    </span>
+                    <button matMiniFab class="player-action-button primary-action-button" type="button" (click)="stopWorkout()">
+                        <mat-icon>stop</mat-icon>
+                    </button>
+                    <span class="session-timer">
+                        {{ workoutPlayerService.elapsedLabel() }}
+                    </span>
+                </span>
             </div>
-            <div>
-                <p class="workout-name">
-                    {{ activeWorkout.name }}
-                    · Block {{ step.blockIndex + 1 }}/{{ activeWorkout.blocks.length }}
-                    · Round {{ step.roundIndex + 1 }}/{{ workoutPlayerService.currentBlock()?.rounds }}
-                </p>
+            <div class="navbar-progress">
+                <span>Round {{ step.roundIndex + 1 }}/{{ workoutPlayerService.currentBlock()?.rounds }}</span>
+                <mat-progress-bar mode="determinate" value="40"></mat-progress-bar>
+                <span>Block {{ step.blockIndex + 1 }}/{{ activeWorkout.blocks.length }}</span>
             </div>
-        </span>
-        <span class="workout-time-reps">
-            {{ step.targetValue }} {{ step.valueType === 'TIME' ? 's' : 'reps' }}
-            @if (step.weight) {
-                <small>{{ step.weight }} kg</small>
-            }
-        </span>
-        <span class="player-actions">
-            <button
-                class="action-btn btn-secondary"
-                [disabled]="workoutPlayerService.stepNumber() <= 1"
-                (click)="previousStep()"
-            >
-                < PREVIOUS
-            </button>
-            <button class="action-btn btn-secondary" (click)="workoutPlayerService.togglePlayPause()">
-                {{ workoutPlayerService.isPlaying() ? 'II PAUSE' : '> PLAY' }}
-            </button>
-            <button class="action-btn btn-secondary" (click)="nextStep()">
-                > NEXT
-            </button>
-            <button class="action-btn btn-primary" (click)="stopWorkout()">
-                STOP
-            </button>
-        </span>
-    </div>
+        </div>
     }
 }

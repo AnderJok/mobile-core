@@ -18,10 +18,10 @@
 }
 
 .section-title {
-    font-family: var(--font-display);
+    font-family: var(--mat-sys-title-large-font);
     font-size: 12px;
     font-weight: 600;
-    color: var(--on-surface-variant);
+    color: var(--mat-sys-on-surface-variant);
     text-transform: uppercase;
     letter-spacing: 0.1em;
 }
@@ -29,19 +29,19 @@
 .section-status {
     font-size: 12px;
     font-weight: 500;
-    color: var(--primary);
+    color: var(--mat-sys-primary);
 }
 
 .workout-card {
-    background-color: var(--surface-bright);
-    border-radius: var(--radius-2xl);
+    background-color: var(--mat-sys-surface-bright);
+    border-radius: var(--mat-sys-corner-extra-large);
     overflow: hidden;
     position: relative;
-    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    box-shadow: var(--mat-sys-level1);
 }
 
 .workout-card.active-border {
-    border-left: 4px solid var(--primary);
+    border-left: 4px solid var(--mat-sys-primary);
 }
 
 .workout-card-content {
@@ -59,22 +59,22 @@
 }
 
 .workout-card-title {
-    font-family: var(--font-display);
+    font-family: var(--mat-sys-title-large-font);
     font-weight: 600;
     font-size: 20px;
-    color: #fff;
+    color: var(--mat-sys-on-surface);
 }
 
 .workout-card-meta {
     font-size: 12px;
     font-weight: 500;
-    color: var(--on-surface-variant);
+    color: var(--mat-sys-on-surface-variant);
 }
 
 .workout-card-description {
     font-size: 14px;
     font-weight: 400;
-    color: var(--on-surface-variant);
+    color: var(--mat-sys-on-surface-variant);
 }
 
 .workout-card-tags {
@@ -84,12 +84,12 @@
 }
 
 .workout-tag {
-    background-color: var(--surface);
+    background-color: var(--mat-sys-surface);
     padding: 0.125rem 0.5rem;
-    border-radius: 0.25rem;
+    border-radius: var(--mat-sys-corner-extra-small);
     font-size: 10px;
     font-weight: 700;
-    color: var(--primary);
+    color: var(--mat-sys-primary);
     letter-spacing: 0.05em;
     text-transform: uppercase;
 }
@@ -101,7 +101,7 @@
 }
 
 .workout-card-footer {
-    background-color: rgba(0, 0, 0, 0.2);
+    background-color: var(--mat-sys-surface-container);
     padding: 0.5rem 1.25rem;
     display: flex;
     justify-content: space-between;
@@ -109,13 +109,13 @@
     font-weight: 600;
     text-transform: uppercase;
     letter-spacing: 0.1em;
-    color: var(--on-surface-variant);
-    border-top: 1px solid rgba(255, 255, 255, 0.05);
+    color: var(--mat-sys-on-surface-variant);
+    border-top: 1px solid var(--mat-sys-outline-variant);
 }
 
 .no-workouts {
     text-align: center;
-    color: var(--on-surface-variant);
+    color: var(--mat-sys-on-surface-variant);
     font-size: 14px;
     font-weight: 500;
 }
